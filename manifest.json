@@ -1,0 +1,69 @@
+﻿{
+  "manifest_version": "1.0",
+  "artifact_bundle": "phasec-round1-protocol-alignment",
+  "created_at": "2026-03-25T12:00:00+08:00",
+  "canonical_artifacts_root": "C:/Users/cyl/Desktop/phaseC_artifacts",
+  "artifact_repo": {
+    "remote": "https://github.com/likepin/phaseC_artifacts.git",
+    "head_before_manifest": "02a44a2ba10dd6d6ba57b9e320add1e9cbb2e6fe"
+  },
+  "source_repositories": {
+    "synthetic": {
+      "repo_root": "C:/Users/cyl/Desktop/data",
+      "remote": "git@github.com:likepin/data.git",
+      "commit": "3256cc5632212ef2dae0bd2238f688748746a2d1"
+    },
+    "model": {
+      "repo_root": "C:/Users/cyl/Desktop/iTransformer-phasec-clean",
+      "remote": "https://github.com/likepin/caci-itransformer.git",
+      "commit": "8432297ef2554efb5468a906082ff631c523e02c"
+    }
+  },
+  "artifacts": {
+    "freeze": "phaseC_freeze.json",
+    "input_spec": "phaseC_input_spec.md",
+    "split": "phaseC_round1_split.json",
+    "training_config": "phaseC_round1_train_config.json",
+    "gating_lambda_npy": "lambda_gating_locked.npy",
+    "gating_lambda_npz": "lambda_gating_locked.npz",
+    "regime_lambda_npy": "lambda_regime_baseline.npy",
+    "regime_lambda_npz": "lambda_regime_baseline.npz",
+    "readme": "README.md"
+  },
+  "signal_inputs": {
+    "gating": {
+      "name": "score_gating",
+      "window": 40,
+      "k": 2,
+      "lambda_hash_round6": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98"
+    },
+    "regime": {
+      "name": "score_regime",
+      "window": 50,
+      "k": 2,
+      "lambda_hash_round6": "6db132725d81c7889924901173a9399221293406"
+    }
+  },
+  "phase_c_status": {
+    "protocol_alignment": "complete",
+    "synthetic_dataset_adapter": "implemented_and_validated",
+    "seed_override": "implemented_and_validated",
+    "baseline_validation": "passed",
+    "gating_noop_control": "passed",
+    "baseline_metrics": {
+      "mse": 0.891771674156189,
+      "mae": 0.7162291407585144
+    },
+    "next_step": "gating-only loss weighting"
+  },
+  "ownership": {
+    "canonical_master": true,
+    "synthetic_project_role": "writes and updates this artifact bundle",
+    "itransformer_project_role": "reads from this bundle and does not write back"
+  },
+  "notes": [
+    "This manifest binds the current artifact bundle to one synthetic repo commit and one model repo commit.",
+    "If a snapshot copy is placed inside the model repository later, that snapshot is not the canonical master.",
+    "Commit this manifest in phaseC_artifacts after review so the artifact bundle gets its own versioned checkpoint."
+  ]
+}
