@@ -1,8 +1,8 @@
 {
   "artifact_name": "phaseC_round1_train_config",
   "created_at": "2026-03-18T22:10:00+08:00",
-  "status": "gating_only_direct_alpha_shrink_validated",
-  "purpose": "Freeze the Phase C round-1 model-side training protocol against the real iTransformer codebase before any integration edits.",
+  "status": "regime_only_extra_time_feature_validated",
+  "purpose": "Freeze and track the Phase C round-1 model-side training protocol and validated experiment states against the real iTransformer codebase.",
   "model_repo_root": "C:/Users/cyl/Desktop/iTransformer-phasec-clean",
   "code_references": {
     "entrypoint_script": "run.py",
@@ -336,14 +336,45 @@
       "evaluation_unit": "prediction_elements_without_timestamp_dedup",
       "artifact": "slice_metrics/phasec_round1_local_slice_metric_summary.json",
       "takeaway": "direct alpha=0.25 remains identical to baseline on noop control, improves global metrics and pre_eval slightly, improves post_eval mse slightly with nearly flat post_eval mae, but is worse than baseline on switch_window, switch_pre, and switch_post."
+    },
+    "regime_noop_control_gpu_itr": {
+      "status": "passed",
+      "mode": "noop",
+      "artifact": "lambda_regime_baseline.npy",
+      "artifact_hash": "6db132725d81c7889924901173a9399221293406",
+      "metrics": {
+        "mse": 0.8902064561843872,
+        "mae": 0.7155085802078247
+      },
+      "matches_baseline": true,
+      "device": "cuda:0"
+    },
+    "regime_only_extra_time_feature_gpu_itr": {
+      "status": "passed",
+      "mode": "extra_time_feature",
+      "artifact": "lambda_regime_baseline.npy",
+      "artifact_hash": "6db132725d81c7889924901173a9399221293406",
+      "metrics": {
+        "mse": 0.8901235461235046,
+        "mae": 0.7147436141967773
+      },
+      "beats_baseline_global": true,
+      "beats_baseline_on_switch_window": false,
+      "device": "cuda:0"
+    },
+    "regime_local_slice_metrics": {
+      "status": "completed",
+      "evaluation_unit": "prediction_elements_without_timestamp_dedup",
+      "artifact": "slice_metrics/phasec_round1_local_slice_metric_summary.json",
+      "takeaway": "regime_noop matches baseline. regime_only extra_time_feature slightly improves global/post_eval but is worse on pre_eval and all switch slices."
     }
   },
   "next_step": {
-    "arm": "gating-only",
-    "integration": "loss weighting",
-    "polarity": "direct",
-    "alpha": 0.25,
-    "reason": "Global metrics and pre_eval improved slightly, but switch_window slices worsened; resolve this tradeoff before regime-only."
+    "arm": "regime-only",
+    "integration": "extra_time_feature",
+    "artifact": "lambda_regime_baseline.npy",
+    "artifact_hash": "6db132725d81c7889924901173a9399221293406",
+    "reason": "First-round regime-only slightly improved global/post_eval but did not improve switch_window; review whether regime should be redesigned before any joint experiment."
   },
   "runtime_environment": {
     "python_executable": "C:\\Users\\cyl\\.conda\\envs\\itr\\python.exe",
@@ -356,6 +387,28 @@
   },
   "notes": [
     "Phase C canonical runtime uses conda env itr; do not use system python for training runs.",
-    "On itr+GPU, direct alpha-shrink outperformed both direct(alpha=1.0) and inverse(alpha=1.0); alpha=0.25 slightly beat baseline on global metrics."
-  ]
+    "On itr+GPU, direct alpha-shrink outperformed both direct(alpha=1.0) and inverse(alpha=1.0); alpha=0.25 slightly beat baseline on global metrics.",
+    "Regime lambda artifact contained 49 NaNs at indices 0..48; the Phase C adapter now sanitizes them deterministically by linear interpolation with edge-value extrapolation."
+  ],
+  "regime_integration_contract": {
+    "status": "frozen_for_round1",
+    "semantics": "observable_exogenous_time_context",
+    "gating_requirement": "off",
+    "modes": [
+      "none",
+      "noop",
+      "extra_time_feature"
+    ],
+    "extra_time_feature": {
+      "regime_x_shape_semantics": "[seq_len]",
+      "regime_y_shape_semantics": "[label_len + pred_len]",
+      "appended_channel_count": 1,
+      "seq_y_mark_includes_future_pred_len": true,
+      "seq_y_mark_policy": "Include the full label_len + pred_len regime trajectory in decoder time marks.",
+      "notes": [
+        "regime_x and regime_y are appended as one scalar channel to seq_x_mark and seq_y_mark.",
+        "No regime polarity, alpha, controller strength, or feature projection type is opened in round 1."
+      ]
+    }
+  }
 }

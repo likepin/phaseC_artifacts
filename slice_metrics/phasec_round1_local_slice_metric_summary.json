@@ -1,6 +1,6 @@
 {
   "artifact_name": "phasec_round1_local_slice_metric_summary",
-  "created_at": "2026-03-25T23:59:00+08:00",
+  "created_at": "2026-03-26T01:20:22+08:00",
   "evaluation_unit": "prediction_elements_without_timestamp_dedup",
   "indexing": "zero_based_half_open_[start,end)",
   "artifacts": {
@@ -9,7 +9,11 @@
     "direct_alpha025_posthoc": "slice_metrics/direct_alpha025_posthoc.json",
     "baseline_switch": "slice_metrics/baseline_switch/phasec_switch_slice_metrics.json",
     "noop_switch": "slice_metrics/noop_switch/phasec_switch_slice_metrics.json",
-    "direct_alpha025_switch": "slice_metrics/direct_alpha025_switch/phasec_switch_slice_metrics.json"
+    "direct_alpha025_switch": "slice_metrics/direct_alpha025_switch/phasec_switch_slice_metrics.json",
+    "regime_noop_posthoc": "slice_metrics/regime_noop_posthoc.json",
+    "regime_extra_time_feature_posthoc": "slice_metrics/regime_extra_time_feature_posthoc.json",
+    "regime_noop_switch": "slice_metrics/regime_noop_switch/phasec_switch_slice_metrics.json",
+    "regime_extra_time_feature_switch": "slice_metrics/regime_extra_time_feature_switch/phasec_switch_slice_metrics.json"
   },
   "variants": {
     "baseline_gpu": {
@@ -245,6 +249,162 @@
           "rmse": 1.0084640979766846
         }
       }
+    },
+    "regime_noop_gpu": {
+      "global": {
+        "mae": 0.7155085802078247,
+        "mse": 0.8902064561843872,
+        "rmse": 0.9435075521469116,
+        "mape": 1.3636109828948975,
+        "mspe": 93.62062072753906
+      },
+      "pre_post": {
+        "pre_eval": {
+          "intervals": [
+            [
+              2900,
+              3400
+            ]
+          ],
+          "prediction_element_count": 29664,
+          "scalar_element_count": 296640,
+          "mae": 0.6915667057037354,
+          "mse": 0.953108012676239,
+          "rmse": 0.9762725234031677
+        },
+        "post_eval": {
+          "intervals": [
+            [
+              5500,
+              6000
+            ]
+          ],
+          "prediction_element_count": 29664,
+          "scalar_element_count": 296640,
+          "mae": 0.7394505143165588,
+          "mse": 0.8273049592971802,
+          "rmse": 0.9095630645751953
+        }
+      },
+      "switch": {
+        "switch_window": {
+          "intervals": [
+            [
+              3400,
+              3800
+            ]
+          ],
+          "prediction_element_count": 38400,
+          "scalar_element_count": 384000,
+          "mae": 0.5998777747154236,
+          "mse": 0.6823139786720276,
+          "rmse": 0.8260229825973511
+        },
+        "switch_pre": {
+          "intervals": [
+            [
+              3400,
+              3600
+            ]
+          ],
+          "prediction_element_count": 19200,
+          "scalar_element_count": 192000,
+          "mae": 0.43185877799987793,
+          "mse": 0.3523489534854889,
+          "rmse": 0.5935899019241333
+        },
+        "switch_post": {
+          "intervals": [
+            [
+              3600,
+              3800
+            ]
+          ],
+          "prediction_element_count": 19200,
+          "scalar_element_count": 192000,
+          "mae": 0.7678964734077454,
+          "mse": 1.0122790336608887,
+          "rmse": 1.0061208009719849
+        }
+      }
+    },
+    "regime_only_extra_time_feature_gpu": {
+      "global": {
+        "mae": 0.7147436141967773,
+        "mse": 0.8901235461235046,
+        "rmse": 0.9434635639190674,
+        "mape": 1.3722140789031982,
+        "mspe": 100.03904724121094
+      },
+      "pre_post": {
+        "pre_eval": {
+          "intervals": [
+            [
+              2900,
+              3400
+            ]
+          ],
+          "prediction_element_count": 29664,
+          "scalar_element_count": 296640,
+          "mae": 0.6926528811454773,
+          "mse": 0.9554310441017151,
+          "rmse": 0.9774615168571472
+        },
+        "post_eval": {
+          "intervals": [
+            [
+              5500,
+              6000
+            ]
+          ],
+          "prediction_element_count": 29664,
+          "scalar_element_count": 296640,
+          "mae": 0.7368346452713013,
+          "mse": 0.824816107749939,
+          "rmse": 0.9081938862800598
+        }
+      },
+      "switch": {
+        "switch_window": {
+          "intervals": [
+            [
+              3400,
+              3800
+            ]
+          ],
+          "prediction_element_count": 38400,
+          "scalar_element_count": 384000,
+          "mae": 0.6004301905632019,
+          "mse": 0.6846224665641785,
+          "rmse": 0.8274191617965698
+        },
+        "switch_pre": {
+          "intervals": [
+            [
+              3400,
+              3600
+            ]
+          ],
+          "prediction_element_count": 19200,
+          "scalar_element_count": 192000,
+          "mae": 0.4319194257259369,
+          "mse": 0.35278797149658203,
+          "rmse": 0.5939595699310303
+        },
+        "switch_post": {
+          "intervals": [
+            [
+              3600,
+              3800
+            ]
+          ],
+          "prediction_element_count": 19200,
+          "scalar_element_count": 192000,
+          "mae": 0.7689409255981445,
+          "mse": 1.0164568424224854,
+          "rmse": 1.0081948041915894
+        }
+      }
     }
   },
   "comparisons": {
@@ -273,7 +433,33 @@
         "mae": 0.0017812848091125488,
         "mse": 0.0047206878662109375
       }
+    },
+    "regime_extra_time_feature_vs_baseline": {
+      "global_delta": {
+        "mae": -0.0007649660110473633,
+        "mse": -8.291006088256836e-05
+      },
+      "pre_eval_delta": {
+        "mae": 0.0010861754417419434,
+        "mse": 0.0023230314254760742
+      },
+      "post_eval_delta": {
+        "mae": -0.0026158690452575684,
+        "mse": -0.002488851547241211
+      },
+      "switch_window_delta": {
+        "mae": 0.0005524158477783203,
+        "mse": 0.002308487892150879
+      },
+      "switch_pre_delta": {
+        "mae": 6.064772605895996e-05,
+        "mse": 0.00043901801109313965
+      },
+      "switch_post_delta": {
+        "mae": 0.00104445219039917,
+        "mse": 0.00417780876159668
+      }
     }
   },
-  "takeaway": "direct alpha=0.25 remains identical to baseline on noop control, improves global metrics and pre_eval slightly, improves post_eval mse slightly with nearly flat post_eval mae, but is worse than baseline on switch_window, switch_pre, and switch_post."
+  "takeaway": "Noop controls remain identical to baseline. Gating direct alpha=0.25 still gives a small global/non-switch trade-off. First-round regime_only extra_time_feature slightly improves global metrics and post_eval, but is worse than baseline on pre_eval, switch_window, switch_pre, and switch_post, so it does not deliver switch-window gains."
 }

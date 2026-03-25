@@ -11,7 +11,7 @@
 - Scope of this freeze:
   - freeze the signal inputs carried from Phase A/Phase B
   - freeze the first-round evaluation protocol
-  - do not change any `iTransformer` files in this step
+  - initial freeze created before model-side edits; this document now also records later validated model-side states
 
 This freeze is based on synthetic signal-side evidence only. It does not claim that the same threshold rules will remain valid on real datasets.
 
@@ -182,13 +182,27 @@ These criteria are meant to decide whether the signal-side work from Phase A/Pha
 ## Current Model-side Status
 - Protocol alignment is complete.
 - `baseline` and `gating noop` both pass in the canonical `itr` GPU environment and match exactly on global metrics.
-- `gating-only inverse` is valid but underperforms baseline on global metrics.
-- `gating-only direct` is better than inverse but still slightly worse than baseline.
-- `gating-only direct + alpha-shrink` is now validated:
-  - `alpha=0.5`: `mse=0.8877125`, `mae=0.7152265`
+- `gating-only direct + alpha-shrink` remains the best gating variant so far:
   - `alpha=0.25`: `mse=0.8867133`, `mae=0.7141200`
-- Current best gating variant so far is `direct, alpha=0.25`, which slightly beats baseline on global metrics in the `itr + GPU` environment.
-- Next step: repeat `direct, alpha=0.25`, then add switch-window and pre/post evaluation before deciding whether to move on to `regime-only`.
+  - interpretation: small global / non-switch gains with a negative switch-window trade-off.
+- First-round `regime-only` protocol is now frozen as:
+  - `phasec_regime_mode = {none, noop, extra_time_feature}`
+  - `regime_x` and `regime_y` are single scalar channels appended to `seq_x_mark` and `seq_y_mark`
+  - `seq_y_mark` includes the full `label_len + pred_len` regime trajectory
+  - `regime ?` is treated as observable exogenous time context, not a prediction target
+  - `gating = off`
+- `regime_noop` passes and matches baseline exactly on global metrics.
+- `regime_only_extra_time_feature` in `itr + GPU` gives:
+  - global: `mse=0.8901235`, `mae=0.7147436`
+  - `pre_eval`: worse than baseline
+  - `post_eval`: better than baseline
+  - `switch_window`, `switch_pre`, and `switch_post`: all worse than baseline
+- Current interpretation:
+  - first-round `regime-only` as implemented does not improve the switch window
+  - it behaves more like a mild global/post-context feature than a switch-window recovery signal
+- Next step:
+  - review whether `regime-only` should be redesigned before any joint `gating+regime` experiment
+
 ## Canonical Runtime Environment
 - Conda env: `itr`
 - Python executable: `C:\Users\cyl\.conda\envs\itr\python.exe`

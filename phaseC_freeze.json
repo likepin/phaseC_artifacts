@@ -1,6 +1,6 @@
 {
   "frozen_timestamp": "2026-03-18T20:54:14.5719628+08:00",
-  "purpose": "Frozen Phase C round-1 signal inputs and protocol. This freeze is based on synthetic Phase A/Phase B outputs only and does not modify model-side code.",
+  "purpose": "Frozen Phase C round-1 signal inputs, protocol, and validated model-side experiment states.",
   "benchmark_version": "phaseA_v0.1_synth",
   "dataset": "synthetic",
   "canonical_artifacts_root": "C:/Users/cyl/Desktop/phaseC_artifacts",
@@ -13,7 +13,11 @@
     "gating_lambda_npz": "lambda_gating_locked.npz",
     "regime_lambda_npy": "lambda_regime_baseline.npy",
     "regime_lambda_npz": "lambda_regime_baseline.npz",
-    "local_slice_metric_summary": "slice_metrics/phasec_round1_local_slice_metric_summary.json"
+    "local_slice_metric_summary": "slice_metrics/phasec_round1_local_slice_metric_summary.json",
+    "regime_noop_posthoc": "slice_metrics/regime_noop_posthoc.json",
+    "regime_extra_time_feature_posthoc": "slice_metrics/regime_extra_time_feature_posthoc.json",
+    "regime_noop_switch": "slice_metrics/regime_noop_switch/phasec_switch_slice_metrics.json",
+    "regime_extra_time_feature_switch": "slice_metrics/regime_extra_time_feature_switch/phasec_switch_slice_metrics.json"
   },
   "source_files": [
     "synthetic_step3_v2/exports_step5pp/phaseA_summary.md",
@@ -27,7 +31,9 @@
     "C:/Users/cyl/Desktop/iTransformer-phasec-clean/run.py",
     "C:/Users/cyl/Desktop/iTransformer-phasec-clean/experiments/exp_long_term_forecasting.py",
     "C:/Users/cyl/Desktop/iTransformer-phasec-clean/data_provider/data_factory.py",
-    "C:/Users/cyl/Desktop/iTransformer-phasec-clean/data_provider/data_loader.py"
+    "C:/Users/cyl/Desktop/iTransformer-phasec-clean/data_provider/data_loader.py",
+    "C:/Users/cyl/Desktop/iTransformer-phasec-clean/tools/phasec_posthoc_test_slices.py",
+    "C:/Users/cyl/Desktop/iTransformer-phasec-clean/tools/phasec_switch_slice_eval.py"
   ],
   "split_artifact": "phaseC_round1_split.json",
   "training_config_artifact": "phaseC_round1_train_config.json",
@@ -183,7 +189,7 @@
     "training_entrypoint": "run.py",
     "experiment_class": "experiments.exp_long_term_forecasting.Exp_Long_Term_Forecast",
     "data_provider": "data_provider.data_factory.data_provider",
-    "training_config_status": "gating_only_inverse_validated_against_real_code",
+    "training_config_status": "regime_only_extra_time_feature_validated",
     "synthetic_dataset_adapter_status": "implemented_and_validated",
     "seed_override_status": "implemented_and_validated",
     "baseline_validation_status": "passed",
@@ -192,7 +198,7 @@
       "mse": 0.891771674156189,
       "mae": 0.7162291407585144
     },
-    "next_integration_step": "evaluate direct gating polarity before regime-only",
+    "next_integration_step": "review first-round regime-only negative switch-window result before any joint gating+regime experiment",
     "gating_only_status": "implemented_and_validated",
     "gating_only_variant": {
       "mode": "loss_weighting",
@@ -204,7 +210,35 @@
       "mse": 0.9256010055541992,
       "mae": 0.7353431582450867
     },
-    "gating_only_improves_global_metrics": false
+    "gating_only_improves_global_metrics": false,
+    "regime_noop_validation_status": "passed",
+    "regime_protocol": {
+      "semantics": "observable_exogenous_time_context",
+      "gating_requirement": "off",
+      "modes": [
+        "none",
+        "noop",
+        "extra_time_feature"
+      ],
+      "extra_time_feature": {
+        "regime_x_shape_semantics": "[seq_len]",
+        "regime_y_shape_semantics": "[label_len + pred_len]",
+        "appended_channel_count": 1,
+        "seq_y_mark_includes_future_pred_len": true
+      }
+    },
+    "regime_only_status": "implemented_and_validated",
+    "regime_only_variant": {
+      "mode": "extra_time_feature",
+      "artifact": "lambda_regime_baseline.npy",
+      "artifact_hash": "6db132725d81c7889924901173a9399221293406",
+      "gating": "off"
+    },
+    "regime_only_metrics": {
+      "mse": 0.8901235461235046,
+      "mae": 0.7147436141967773
+    },
+    "regime_only_improves_switch_window": false
   },
   "phase_c_protocol_alignment": {
     "status": "complete",
@@ -254,7 +288,7 @@
     }
   },
   "gating_only_improves_global_metrics": true,
-  "next_integration_step": "review the global-vs-switch tradeoff of direct alpha=0.25 before any further gating or regime-side changes",
+  "next_integration_step": "review first-round regime-only negative switch-window result before any joint gating+regime experiment",
   "gating_only_local_metrics": {
     "evaluation_unit": "prediction_elements_without_timestamp_dedup",
     "artifact": "slice_metrics/phasec_round1_local_slice_metric_summary.json",
@@ -285,5 +319,62 @@
       }
     },
     "takeaway": "direct alpha=0.25 remains identical to baseline on noop control, improves global metrics and pre_eval slightly, improves post_eval mse slightly with nearly flat post_eval mae, but is worse than baseline on switch_window, switch_pre, and switch_post."
-  }
+  },
+  "regime_only_status": "extra_time_feature_validated",
+  "regime_only_best_variant": {
+    "mode": "extra_time_feature",
+    "artifact": "lambda_regime_baseline.npy",
+    "hash": "6db132725d81c7889924901173a9399221293406",
+    "gating": "off"
+  },
+  "regime_only_comparison_gpu_itr": {
+    "baseline": {
+      "mse": 0.8902064561843872,
+      "mae": 0.7155085802078247
+    },
+    "noop": {
+      "mse": 0.8902064561843872,
+      "mae": 0.7155085802078247
+    },
+    "extra_time_feature": {
+      "mse": 0.8901235461235046,
+      "mae": 0.7147436141967773
+    }
+  },
+  "regime_only_improves_switch_window": false,
+  "regime_only_local_metrics": {
+    "evaluation_unit": "prediction_elements_without_timestamp_dedup",
+    "artifact": "slice_metrics/phasec_round1_local_slice_metric_summary.json",
+    "summary": {
+      "global_delta": {
+        "mae": -0.0007649660110473633,
+        "mse": -8.291006088256836e-05
+      },
+      "pre_eval_delta": {
+        "mae": 0.0010861754417419434,
+        "mse": 0.0023230314254760742
+      },
+      "post_eval_delta": {
+        "mae": -0.0026158690452575684,
+        "mse": -0.002488851547241211
+      },
+      "switch_window_delta": {
+        "mae": 0.0005524158477783203,
+        "mse": 0.002308487892150879
+      },
+      "switch_pre_delta": {
+        "mae": 6.064772605895996e-05,
+        "mse": 0.00043901801109313965
+      },
+      "switch_post_delta": {
+        "mae": 0.00104445219039917,
+        "mse": 0.00417780876159668
+      }
+    },
+    "takeaway": "regime_only extra_time_feature slightly improves global/post_eval but is worse than baseline on pre_eval and all switch slices."
+  },
+  "notes": [
+    "Regime lambda artifact contained 49 NaNs at indices 0..48; the Phase C adapter now sanitizes them deterministically by linear interpolation with edge-value extrapolation.",
+    "First-round regime_only extra_time_feature slightly improved global/post_eval but degraded pre_eval and all switch-window slices."
+  ]
 }
