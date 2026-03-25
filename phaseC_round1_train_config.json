@@ -1,9 +1,9 @@
 {
   "artifact_name": "phaseC_round1_train_config",
   "created_at": "2026-03-18T22:10:00+08:00",
-  "status": "protocol_alignment_validated",
+  "status": "gating_only_inverse_validated",
   "purpose": "Freeze the Phase C round-1 model-side training protocol against the real iTransformer codebase before any integration edits.",
-  "model_repo_root": "C:/Users/cyl/Desktop/iTransformer-main",
+  "model_repo_root": "C:/Users/cyl/Desktop/iTransformer-phasec-clean",
   "code_references": {
     "entrypoint_script": "run.py",
     "experiment_class": "experiments.exp_long_term_forecasting.Exp_Long_Term_Forecast",
@@ -204,11 +204,46 @@
         "mae": 0.7162291407585144
       },
       "matches_baseline": true
+    },
+    "gating_weighted_inverse": {
+      "status": "passed",
+      "mode": "loss_weighting",
+      "polarity": "inverse",
+      "artifact": "lambda_gating_locked.npy",
+      "artifact_hash": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98",
+      "metrics": {
+        "mse": 0.9256010055541992,
+        "mae": 0.7353431582450867
+      },
+      "beats_baseline": false,
+      "weight_summary_last_epoch": {
+        "weight_mean": 1.0,
+        "weight_std": 0.393812,
+        "weight_min": 0.090636,
+        "weight_max": 1.663826,
+        "weight_p10": 0.266587,
+        "weight_p50": 1.11986,
+        "weight_p90": 1.400231
+      },
+      "interpretation": "Weighted inverse gating is active and non-degenerate, but it degrades global metrics versus baseline on round-1 synthetic."
     }
   },
   "next_step": {
     "arm": "gating-only",
     "integration": "loss weighting",
-    "reason": "Protocol alignment, baseline validation, and no-op gating read-in are all complete."
-  }
+    "polarity": "direct",
+    "reason": "inverse is now validated and underperforms baseline; the next controlled comparison is direct polarity before regime-only."
+  },
+  "runtime_environment": {
+    "python_executable": "C:\\Users\\cyl\\.conda\\envs\\itr\\python.exe",
+    "conda_env_name": "itr",
+    "runner": "conda run -n itr python",
+    "torch_expected": "2.9.1+cu128",
+    "gpu_expected": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "arch_expected": "sm_120",
+    "device_policy": "use itr env for all Phase C training and evaluation runs"
+  },
+  "notes": [
+    "Phase C canonical runtime uses conda env itr; do not use system python for training runs."
+  ]
 }

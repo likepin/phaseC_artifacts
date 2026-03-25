@@ -23,10 +23,10 @@
     "synthetic_step3_v2/exports_step5pp/phaseC_round1_split.json",
     "synthetic_step3_v2/exports_step5pp/phaseC_round1_train_config.json",
     "synthetic_step3_v2/exports_step5pp/phaseC_staging/lambda_regime_baseline.json",
-    "C:/Users/cyl/Desktop/iTransformer-main/run.py",
-    "C:/Users/cyl/Desktop/iTransformer-main/experiments/exp_long_term_forecasting.py",
-    "C:/Users/cyl/Desktop/iTransformer-main/data_provider/data_factory.py",
-    "C:/Users/cyl/Desktop/iTransformer-main/data_provider/data_loader.py"
+    "C:/Users/cyl/Desktop/iTransformer-phasec-clean/run.py",
+    "C:/Users/cyl/Desktop/iTransformer-phasec-clean/experiments/exp_long_term_forecasting.py",
+    "C:/Users/cyl/Desktop/iTransformer-phasec-clean/data_provider/data_factory.py",
+    "C:/Users/cyl/Desktop/iTransformer-phasec-clean/data_provider/data_loader.py"
   ],
   "split_artifact": "phaseC_round1_split.json",
   "training_config_artifact": "phaseC_round1_train_config.json",
@@ -178,11 +178,11 @@
     ]
   },
   "model_side_freeze": {
-    "model_repo_root": "C:/Users/cyl/Desktop/iTransformer-main",
+    "model_repo_root": "C:/Users/cyl/Desktop/iTransformer-phasec-clean",
     "training_entrypoint": "run.py",
     "experiment_class": "experiments.exp_long_term_forecasting.Exp_Long_Term_Forecast",
     "data_provider": "data_provider.data_factory.data_provider",
-    "training_config_status": "validated_against_real_code",
+    "training_config_status": "gating_only_inverse_validated_against_real_code",
     "synthetic_dataset_adapter_status": "implemented_and_validated",
     "seed_override_status": "implemented_and_validated",
     "baseline_validation_status": "passed",
@@ -191,12 +191,31 @@
       "mse": 0.891771674156189,
       "mae": 0.7162291407585144
     },
-    "next_integration_step": "gating-only loss weighting"
+    "next_integration_step": "evaluate direct gating polarity before regime-only",
+    "gating_only_status": "implemented_and_validated",
+    "gating_only_variant": {
+      "mode": "loss_weighting",
+      "polarity": "inverse",
+      "artifact": "lambda_gating_locked.npy",
+      "artifact_hash": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98"
+    },
+    "gating_only_metrics": {
+      "mse": 0.9256010055541992,
+      "mae": 0.7353431582450867
+    },
+    "gating_only_improves_global_metrics": false
   },
   "phase_c_protocol_alignment": {
     "status": "complete",
     "dataset_smoke_check_passed": true,
     "baseline_deterministic_repeat_passed": true,
     "gating_noop_control_passed": true
-  }
+  },
+  "model_side_runtime": {
+    "python_executable": "C:\\Users\\cyl\\.conda\\envs\\itr\\python.exe",
+    "conda_env_name": "itr",
+    "runner": "conda run -n itr python",
+    "required_for_phase_c_training": true
+  },
+  "next_run_environment": "itr"
 }

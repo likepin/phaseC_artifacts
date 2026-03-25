@@ -185,4 +185,14 @@ These criteria are meant to decide whether the signal-side work from Phase A/Pha
 - `Dataset_PhaseC_Synthetic` is implemented and validated against `phaseC_round1_split.json`.
 - `run.py` now exposes `--seed`; round-1 baseline was validated under `seed=2026`.
 - A no-op gating control using `lambda_gating_locked.npy` runs and matches baseline exactly.
-- Next step: real `gating-only` with minimal `loss weighting`.
+- Real `gating-only` is now implemented with `loss weighting`.
+- The first validated gating variant is `mode=loss_weighting`, `polarity=inverse`, `artifact=lambda_gating_locked.npy`, `hash=f4bc9d33f862bbd93db5af7ae20b4edb995cae98`.
+- `gating-only (inverse)` runs end-to-end and logs non-degenerate weight summaries, but its global metrics are worse than baseline: `mse=0.9256010055541992`, `mae=0.7353431582450867`.
+- Next step: keep the rest of the protocol fixed and run the controlled `direct` polarity comparison before moving to `regime-only`.
+
+## Canonical Runtime Environment
+- Conda env: `itr`
+- Python executable: `C:\Users\cyl\.conda\envs\itr\python.exe`
+- Canonical runner: `conda run -n itr python`
+- Reason: this environment contains `torch 2.9.1+cu128` with `sm_120` support for the RTX 5060 Laptop GPU.
+- Rule: do not use the system Python (`D:\Python\Python312\python.exe`) for Phase C training or evaluation runs.
