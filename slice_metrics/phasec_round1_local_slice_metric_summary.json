@@ -1,0 +1,279 @@
+{
+  "artifact_name": "phasec_round1_local_slice_metric_summary",
+  "created_at": "2026-03-25T23:59:00+08:00",
+  "evaluation_unit": "prediction_elements_without_timestamp_dedup",
+  "indexing": "zero_based_half_open_[start,end)",
+  "artifacts": {
+    "baseline_posthoc": "slice_metrics/baseline_posthoc.json",
+    "noop_posthoc": "slice_metrics/noop_posthoc.json",
+    "direct_alpha025_posthoc": "slice_metrics/direct_alpha025_posthoc.json",
+    "baseline_switch": "slice_metrics/baseline_switch/phasec_switch_slice_metrics.json",
+    "noop_switch": "slice_metrics/noop_switch/phasec_switch_slice_metrics.json",
+    "direct_alpha025_switch": "slice_metrics/direct_alpha025_switch/phasec_switch_slice_metrics.json"
+  },
+  "variants": {
+    "baseline_gpu": {
+      "global": {
+        "mae": 0.7155085802078247,
+        "mse": 0.8902064561843872,
+        "rmse": 0.9435075521469116,
+        "mape": 1.3636109828948975,
+        "mspe": 93.62062072753906
+      },
+      "pre_post": {
+        "pre_eval": {
+          "intervals": [
+            [
+              2900,
+              3400
+            ]
+          ],
+          "prediction_element_count": 29664,
+          "scalar_element_count": 296640,
+          "mae": 0.6915667057037354,
+          "mse": 0.953108012676239,
+          "rmse": 0.9762725234031677
+        },
+        "post_eval": {
+          "intervals": [
+            [
+              5500,
+              6000
+            ]
+          ],
+          "prediction_element_count": 29664,
+          "scalar_element_count": 296640,
+          "mae": 0.7394505143165588,
+          "mse": 0.8273049592971802,
+          "rmse": 0.9095630645751953
+        }
+      },
+      "switch": {
+        "switch_window": {
+          "intervals": [
+            [
+              3400,
+              3800
+            ]
+          ],
+          "prediction_element_count": 38400,
+          "scalar_element_count": 384000,
+          "mae": 0.5998777747154236,
+          "mse": 0.6823139786720276,
+          "rmse": 0.8260229825973511
+        },
+        "switch_pre": {
+          "intervals": [
+            [
+              3400,
+              3600
+            ]
+          ],
+          "prediction_element_count": 19200,
+          "scalar_element_count": 192000,
+          "mae": 0.43185877799987793,
+          "mse": 0.3523489534854889,
+          "rmse": 0.5935899019241333
+        },
+        "switch_post": {
+          "intervals": [
+            [
+              3600,
+              3800
+            ]
+          ],
+          "prediction_element_count": 19200,
+          "scalar_element_count": 192000,
+          "mae": 0.7678964734077454,
+          "mse": 1.0122790336608887,
+          "rmse": 1.0061208009719849
+        }
+      }
+    },
+    "gating_noop_gpu": {
+      "global": {
+        "mae": 0.7155085802078247,
+        "mse": 0.8902064561843872,
+        "rmse": 0.9435075521469116,
+        "mape": 1.3636109828948975,
+        "mspe": 93.62062072753906
+      },
+      "pre_post": {
+        "pre_eval": {
+          "intervals": [
+            [
+              2900,
+              3400
+            ]
+          ],
+          "prediction_element_count": 29664,
+          "scalar_element_count": 296640,
+          "mae": 0.6915667057037354,
+          "mse": 0.953108012676239,
+          "rmse": 0.9762725234031677
+        },
+        "post_eval": {
+          "intervals": [
+            [
+              5500,
+              6000
+            ]
+          ],
+          "prediction_element_count": 29664,
+          "scalar_element_count": 296640,
+          "mae": 0.7394505143165588,
+          "mse": 0.8273049592971802,
+          "rmse": 0.9095630645751953
+        }
+      },
+      "switch": {
+        "switch_window": {
+          "intervals": [
+            [
+              3400,
+              3800
+            ]
+          ],
+          "prediction_element_count": 38400,
+          "scalar_element_count": 384000,
+          "mae": 0.5998777747154236,
+          "mse": 0.6823139786720276,
+          "rmse": 0.8260229825973511
+        },
+        "switch_pre": {
+          "intervals": [
+            [
+              3400,
+              3600
+            ]
+          ],
+          "prediction_element_count": 19200,
+          "scalar_element_count": 192000,
+          "mae": 0.43185877799987793,
+          "mse": 0.3523489534854889,
+          "rmse": 0.5935899019241333
+        },
+        "switch_post": {
+          "intervals": [
+            [
+              3600,
+              3800
+            ]
+          ],
+          "prediction_element_count": 19200,
+          "scalar_element_count": 192000,
+          "mae": 0.7678964734077454,
+          "mse": 1.0122790336608887,
+          "rmse": 1.0061208009719849
+        }
+      }
+    },
+    "gating_direct_alpha025_gpu_repeat": {
+      "global": {
+        "mae": 0.7141200304031372,
+        "mse": 0.8867132663726807,
+        "rmse": 0.9416545629501343,
+        "mape": 1.3669157028198242,
+        "mspe": 98.94168853759766
+      },
+      "pre_post": {
+        "pre_eval": {
+          "intervals": [
+            [
+              2900,
+              3400
+            ]
+          ],
+          "prediction_element_count": 29664,
+          "scalar_element_count": 296640,
+          "mae": 0.6883888840675354,
+          "mse": 0.9504517316818237,
+          "rmse": 0.9749111533164978
+        },
+        "post_eval": {
+          "intervals": [
+            [
+              5500,
+              6000
+            ]
+          ],
+          "prediction_element_count": 29664,
+          "scalar_element_count": 296640,
+          "mae": 0.7398510575294495,
+          "mse": 0.822974443435669,
+          "rmse": 0.9071794152259827
+        }
+      },
+      "switch": {
+        "switch_window": {
+          "intervals": [
+            [
+              3400,
+              3800
+            ]
+          ],
+          "prediction_element_count": 38400,
+          "scalar_element_count": 384000,
+          "mae": 0.6015140414237976,
+          "mse": 0.6859801411628723,
+          "rmse": 0.8282392024993896
+        },
+        "switch_pre": {
+          "intervals": [
+            [
+              3400,
+              3600
+            ]
+          ],
+          "prediction_element_count": 19200,
+          "scalar_element_count": 192000,
+          "mae": 0.43335041403770447,
+          "mse": 0.3549606204032898,
+          "rmse": 0.5957857370376587
+        },
+        "switch_post": {
+          "intervals": [
+            [
+              3600,
+              3800
+            ]
+          ],
+          "prediction_element_count": 19200,
+          "scalar_element_count": 192000,
+          "mae": 0.7696777582168579,
+          "mse": 1.0169997215270996,
+          "rmse": 1.0084640979766846
+        }
+      }
+    }
+  },
+  "comparisons": {
+    "direct_alpha025_vs_baseline": {
+      "global_delta": {
+        "mae": -0.0013885498046875,
+        "mse": -0.003493189811706543
+      },
+      "pre_eval_delta": {
+        "mae": -0.003177821636199951,
+        "mse": -0.002656280994415283
+      },
+      "post_eval_delta": {
+        "mae": 0.000400543212890625,
+        "mse": -0.0043305158615112305
+      },
+      "switch_window_delta": {
+        "mae": 0.0016362667083740234,
+        "mse": 0.0036661624908447266
+      },
+      "switch_pre_delta": {
+        "mae": 0.001491636037826538,
+        "mse": 0.0026116669178009033
+      },
+      "switch_post_delta": {
+        "mae": 0.0017812848091125488,
+        "mse": 0.0047206878662109375
+      }
+    }
+  },
+  "takeaway": "direct alpha=0.25 remains identical to baseline on noop control, improves global metrics and pre_eval slightly, improves post_eval mse slightly with nearly flat post_eval mae, but is worse than baseline on switch_window, switch_pre, and switch_post."
+}

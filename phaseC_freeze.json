@@ -12,7 +12,8 @@
     "gating_lambda_npy": "lambda_gating_locked.npy",
     "gating_lambda_npz": "lambda_gating_locked.npz",
     "regime_lambda_npy": "lambda_regime_baseline.npy",
-    "regime_lambda_npz": "lambda_regime_baseline.npz"
+    "regime_lambda_npz": "lambda_regime_baseline.npz",
+    "local_slice_metric_summary": "slice_metrics/phasec_round1_local_slice_metric_summary.json"
   },
   "source_files": [
     "synthetic_step3_v2/exports_step5pp/phaseA_summary.md",
@@ -217,5 +218,72 @@
     "runner": "conda run -n itr python",
     "required_for_phase_c_training": true
   },
-  "next_run_environment": "itr"
+  "next_run_environment": "itr",
+  "gating_only_status": "direct_alpha_shrink_validated",
+  "gating_only_best_variant": {
+    "mode": "loss_weighting",
+    "polarity": "direct",
+    "alpha": 0.25,
+    "artifact": "lambda_gating_locked.npy",
+    "hash": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98"
+  },
+  "gating_only_comparison_gpu_itr": {
+    "baseline": {
+      "mse": 0.8902064561843872,
+      "mae": 0.7155085802078247
+    },
+    "noop": {
+      "mse": 0.8902064561843872,
+      "mae": 0.7155085802078247
+    },
+    "inverse_alpha1": {
+      "mse": 0.9238790273666382,
+      "mae": 0.7343993782997131
+    },
+    "direct_alpha1": {
+      "mse": 0.8971740007400513,
+      "mae": 0.7207692861557007
+    },
+    "direct_alpha05": {
+      "mse": 0.8877124786376953,
+      "mae": 0.7152264714241028
+    },
+    "direct_alpha025": {
+      "mse": 0.8867132663726807,
+      "mae": 0.7141200304031372
+    }
+  },
+  "gating_only_improves_global_metrics": true,
+  "next_integration_step": "review the global-vs-switch tradeoff of direct alpha=0.25 before any further gating or regime-side changes",
+  "gating_only_local_metrics": {
+    "evaluation_unit": "prediction_elements_without_timestamp_dedup",
+    "artifact": "slice_metrics/phasec_round1_local_slice_metric_summary.json",
+    "summary": {
+      "global_delta": {
+        "mae": -0.0013885498046875,
+        "mse": -0.003493189811706543
+      },
+      "pre_eval_delta": {
+        "mae": -0.003177821636199951,
+        "mse": -0.002656280994415283
+      },
+      "post_eval_delta": {
+        "mae": 0.000400543212890625,
+        "mse": -0.0043305158615112305
+      },
+      "switch_window_delta": {
+        "mae": 0.0016362667083740234,
+        "mse": 0.0036661624908447266
+      },
+      "switch_pre_delta": {
+        "mae": 0.001491636037826538,
+        "mse": 0.0026116669178009033
+      },
+      "switch_post_delta": {
+        "mae": 0.0017812848091125488,
+        "mse": 0.0047206878662109375
+      }
+    },
+    "takeaway": "direct alpha=0.25 remains identical to baseline on noop control, improves global metrics and pre_eval slightly, improves post_eval mse slightly with nearly flat post_eval mae, but is worse than baseline on switch_window, switch_pre, and switch_post."
+  }
 }

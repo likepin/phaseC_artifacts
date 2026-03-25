@@ -1,0 +1,54 @@
+{
+  "artifact_name": "phasec_switch_window_slice_metrics",
+  "variant_name": "baseline_gpu",
+  "checkpoint_dir": "C:\\Users\\cyl\\Desktop\\iTransformer-phasec-clean\\checkpoints\\phasec_baseline_gpu_iTransformer_phasec_synth_M_ft96_sl48_ll96_pl512_dm8_nh2_el1_dl2048_df1_fctimeF_ebTrue_dtPhaseC_round1_synth_gpu_baseline_projection_0",
+  "results_dir": "C:\\Users\\cyl\\Desktop\\phaseC_artifacts\\slice_metrics\\baseline_switch",
+  "evaluation_unit": "prediction_elements_without_timestamp_dedup",
+  "indexing": "zero_based_half_open_[start,end)",
+  "window_start_count": 495,
+  "window_start_min": 3209,
+  "window_start_max": 3703,
+  "forecast_time_min": 3305,
+  "forecast_time_max": 3894,
+  "slices": {
+    "switch_window": {
+      "intervals": [
+        [
+          3400,
+          3800
+        ]
+      ],
+      "prediction_element_count": 38400,
+      "scalar_element_count": 384000,
+      "mae": 0.5998777747154236,
+      "mse": 0.6823139786720276,
+      "rmse": 0.8260229825973511
+    },
+    "switch_pre": {
+      "intervals": [
+        [
+          3400,
+          3600
+        ]
+      ],
+      "prediction_element_count": 19200,
+      "scalar_element_count": 192000,
+      "mae": 0.43185877799987793,
+      "mse": 0.3523489534854889,
+      "rmse": 0.5935899019241333
+    },
+    "switch_post": {
+      "intervals": [
+        [
+          3600,
+          3800
+        ]
+      ],
+      "prediction_element_count": 19200,
+      "scalar_element_count": 192000,
+      "mae": 0.7678964734077454,
+      "mse": 1.0122790336608887,
+      "rmse": 1.0061208009719849
+    }
+  }
+}

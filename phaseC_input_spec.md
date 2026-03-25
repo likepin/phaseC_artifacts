@@ -180,16 +180,15 @@ Use the following interpretation for the first round:
 These criteria are meant to decide whether the signal-side work from Phase A/Phase B transfers into model-side value. They are not meant to re-open the synthetic benchmark itself.
 
 ## Current Model-side Status
-
-- Phase C protocol-alignment milestone is complete.
-- `Dataset_PhaseC_Synthetic` is implemented and validated against `phaseC_round1_split.json`.
-- `run.py` now exposes `--seed`; round-1 baseline was validated under `seed=2026`.
-- A no-op gating control using `lambda_gating_locked.npy` runs and matches baseline exactly.
-- Real `gating-only` is now implemented with `loss weighting`.
-- The first validated gating variant is `mode=loss_weighting`, `polarity=inverse`, `artifact=lambda_gating_locked.npy`, `hash=f4bc9d33f862bbd93db5af7ae20b4edb995cae98`.
-- `gating-only (inverse)` runs end-to-end and logs non-degenerate weight summaries, but its global metrics are worse than baseline: `mse=0.9256010055541992`, `mae=0.7353431582450867`.
-- Next step: keep the rest of the protocol fixed and run the controlled `direct` polarity comparison before moving to `regime-only`.
-
+- Protocol alignment is complete.
+- `baseline` and `gating noop` both pass in the canonical `itr` GPU environment and match exactly on global metrics.
+- `gating-only inverse` is valid but underperforms baseline on global metrics.
+- `gating-only direct` is better than inverse but still slightly worse than baseline.
+- `gating-only direct + alpha-shrink` is now validated:
+  - `alpha=0.5`: `mse=0.8877125`, `mae=0.7152265`
+  - `alpha=0.25`: `mse=0.8867133`, `mae=0.7141200`
+- Current best gating variant so far is `direct, alpha=0.25`, which slightly beats baseline on global metrics in the `itr + GPU` environment.
+- Next step: repeat `direct, alpha=0.25`, then add switch-window and pre/post evaluation before deciding whether to move on to `regime-only`.
 ## Canonical Runtime Environment
 - Conda env: `itr`
 - Python executable: `C:\Users\cyl\.conda\envs\itr\python.exe`

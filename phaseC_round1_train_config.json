@@ -1,7 +1,7 @@
 {
   "artifact_name": "phaseC_round1_train_config",
   "created_at": "2026-03-18T22:10:00+08:00",
-  "status": "gating_only_inverse_validated",
+  "status": "gating_only_direct_alpha_shrink_validated",
   "purpose": "Freeze the Phase C round-1 model-side training protocol against the real iTransformer codebase before any integration edits.",
   "model_repo_root": "C:/Users/cyl/Desktop/iTransformer-phasec-clean",
   "code_references": {
@@ -226,13 +226,124 @@
         "weight_p90": 1.400231
       },
       "interpretation": "Weighted inverse gating is active and non-degenerate, but it degrades global metrics versus baseline on round-1 synthetic."
+    },
+    "baseline_run_gpu_itr": {
+      "status": "passed",
+      "seed": 2026,
+      "metrics": {
+        "mse": 0.8902064561843872,
+        "mae": 0.7155085802078247
+      },
+      "device": "cuda:0",
+      "runner": "conda run -n itr python"
+    },
+    "gating_noop_control_gpu_itr": {
+      "status": "passed",
+      "artifact": "lambda_gating_locked.npy",
+      "metrics": {
+        "mse": 0.8902064561843872,
+        "mae": 0.7155085802078247
+      },
+      "matches_baseline": true,
+      "device": "cuda:0"
+    },
+    "gating_weighted_inverse_gpu_itr": {
+      "mode": "loss_weighting",
+      "polarity": "inverse",
+      "alpha": 1.0,
+      "artifact": "lambda_gating_locked.npy",
+      "artifact_hash": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98",
+      "metrics": {
+        "mse": 0.9238790273666382,
+        "mae": 0.7343993782997131
+      },
+      "beats_baseline": false,
+      "weight_summary_last_epoch": {
+        "weight_mean": 1.0,
+        "weight_std": 0.394556,
+        "weight_min": 0.082473,
+        "weight_max": 1.759762,
+        "weight_p10": 0.26723,
+        "weight_p50": 1.118748,
+        "weight_p90": 1.400954
+      }
+    },
+    "gating_weighted_direct_gpu_itr": {
+      "mode": "loss_weighting",
+      "polarity": "direct",
+      "alpha": 1.0,
+      "artifact": "lambda_gating_locked.npy",
+      "artifact_hash": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98",
+      "metrics": {
+        "mse": 0.8971740007400513,
+        "mae": 0.7207692861557007
+      },
+      "beats_baseline": false,
+      "weight_summary_last_epoch": {
+        "weight_mean": 1.0,
+        "weight_std": 0.76789,
+        "weight_min": 0.054646,
+        "weight_max": 3.701029,
+        "weight_p10": 0.220662,
+        "weight_p50": 0.748709,
+        "weight_p90": 2.315145
+      }
+    },
+    "gating_weighted_direct_alpha05_gpu_itr": {
+      "mode": "loss_weighting",
+      "polarity": "direct",
+      "alpha": 0.5,
+      "artifact": "lambda_gating_locked.npy",
+      "artifact_hash": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98",
+      "metrics": {
+        "mse": 0.8877124786376953,
+        "mae": 0.7152264714241028
+      },
+      "beats_baseline": true,
+      "weight_summary_last_epoch": {
+        "weight_mean": 1.0,
+        "weight_std": 0.383945,
+        "weight_min": 0.527323,
+        "weight_max": 2.350515,
+        "weight_p10": 0.610331,
+        "weight_p50": 0.874355,
+        "weight_p90": 1.657573
+      }
+    },
+    "gating_weighted_direct_alpha025_gpu_itr": {
+      "mode": "loss_weighting",
+      "polarity": "direct",
+      "alpha": 0.25,
+      "artifact": "lambda_gating_locked.npy",
+      "artifact_hash": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98",
+      "metrics": {
+        "mse": 0.8867132663726807,
+        "mae": 0.7141200304031372
+      },
+      "beats_baseline": true,
+      "weight_summary_last_epoch": {
+        "weight_mean": 1.0,
+        "weight_std": 0.191972,
+        "weight_min": 0.763662,
+        "weight_max": 1.675257,
+        "weight_p10": 0.805166,
+        "weight_p50": 0.937177,
+        "weight_p90": 1.328786
+      }
+    },
+    "local_slice_metrics": {
+      "status": "completed",
+      "evaluation_unit": "prediction_elements_without_timestamp_dedup",
+      "artifact": "slice_metrics/phasec_round1_local_slice_metric_summary.json",
+      "takeaway": "direct alpha=0.25 remains identical to baseline on noop control, improves global metrics and pre_eval slightly, improves post_eval mse slightly with nearly flat post_eval mae, but is worse than baseline on switch_window, switch_pre, and switch_post."
     }
   },
   "next_step": {
     "arm": "gating-only",
     "integration": "loss weighting",
     "polarity": "direct",
-    "reason": "inverse is now validated and underperforms baseline; the next controlled comparison is direct polarity before regime-only."
+    "alpha": 0.25,
+    "reason": "Global metrics and pre_eval improved slightly, but switch_window slices worsened; resolve this tradeoff before regime-only."
   },
   "runtime_environment": {
     "python_executable": "C:\\Users\\cyl\\.conda\\envs\\itr\\python.exe",
@@ -244,6 +355,7 @@
     "device_policy": "use itr env for all Phase C training and evaluation runs"
   },
   "notes": [
-    "Phase C canonical runtime uses conda env itr; do not use system python for training runs."
+    "Phase C canonical runtime uses conda env itr; do not use system python for training runs.",
+    "On itr+GPU, direct alpha-shrink outperformed both direct(alpha=1.0) and inverse(alpha=1.0); alpha=0.25 slightly beat baseline on global metrics."
   ]
 }

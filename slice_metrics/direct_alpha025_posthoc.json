@@ -1,0 +1,50 @@
+{
+  "artifact_name": "phasec_posthoc_test_slice_metrics",
+  "results_dir": "C:\\Users\\cyl\\Desktop\\iTransformer-phasec-clean\\results\\pC_d025_r2_iTransformer_phasec_synth_M_ft96_sl48_ll96_pl512_dm8_nh2_el1_dl2048_df1_fctimeF_ebTrue_dtpCd025r2_projection_0",
+  "variant_name": "gating_direct_alpha025_gpu_repeat",
+  "evaluation_unit": "prediction_elements_without_timestamp_dedup",
+  "indexing": "zero_based_half_open_[start,end)",
+  "pred_shape": [
+    618,
+    96,
+    10
+  ],
+  "test_window_count": 618,
+  "forecast_time_min": 2996,
+  "forecast_time_max": 5999,
+  "global_metrics_from_results": {
+    "mae": 0.7141200304031372,
+    "mse": 0.8867132663726807,
+    "rmse": 0.9416545629501343,
+    "mape": 1.3669157028198242,
+    "mspe": 98.94168853759766
+  },
+  "slices": {
+    "pre_eval": {
+      "intervals": [
+        [
+          2900,
+          3400
+        ]
+      ],
+      "prediction_element_count": 29664,
+      "scalar_element_count": 296640,
+      "mae": 0.6883888840675354,
+      "mse": 0.9504517316818237,
+      "rmse": 0.9749111533164978
+    },
+    "post_eval": {
+      "intervals": [
+        [
+          5500,
+          6000
+        ]
+      ],
+      "prediction_element_count": 29664,
+      "scalar_element_count": 296640,
+      "mae": 0.7398510575294495,
+      "mse": 0.822974443435669,
+      "rmse": 0.9071794152259827
+    }
+  }
+}

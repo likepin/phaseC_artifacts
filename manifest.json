@@ -1,6 +1,6 @@
 {
   "manifest_version": "1.0",
-  "artifact_bundle": "phasec-round1-gating-only-inverse",
+  "artifact_bundle": "phasec-round1-gating-direct-alpha-shrink",
   "created_at": "2026-03-25T12:00:00+08:00",
   "canonical_artifacts_root": "C:/Users/cyl/Desktop/phaseC_artifacts",
   "artifact_repo": {
@@ -35,7 +35,8 @@
     "gating_lambda_npz": "lambda_gating_locked.npz",
     "regime_lambda_npy": "lambda_regime_baseline.npy",
     "regime_lambda_npz": "lambda_regime_baseline.npz",
-    "readme": "README.md"
+    "readme": "README.md",
+    "local_slice_metric_summary": "slice_metrics/phasec_round1_local_slice_metric_summary.json"
   },
   "signal_inputs": {
     "gating": {
@@ -61,7 +62,7 @@
       "mse": 0.891771674156189,
       "mae": 0.7162291407585144
     },
-    "next_step": "direct gating polarity comparison before regime-only",
+    "next_step": "decide whether to accept the global-vs-switch tradeoff of direct alpha=0.25 before moving to regime-only",
     "gating_only_loss_weighting_inverse": {
       "status": "passed",
       "mode": "loss_weighting",
@@ -82,7 +83,116 @@
         "weight_p50": 1.11986,
         "weight_p90": 1.400231
       }
-    }
+    },
+    "baseline_gpu_itr": {
+      "status": "passed",
+      "metrics": {
+        "mse": 0.8902064561843872,
+        "mae": 0.7155085802078247
+      }
+    },
+    "gating_noop_gpu_itr": {
+      "status": "passed",
+      "metrics": {
+        "mse": 0.8902064561843872,
+        "mae": 0.7155085802078247
+      },
+      "matches_baseline": true
+    },
+    "gating_weighted_inverse_gpu_itr": {
+      "mode": "loss_weighting",
+      "polarity": "inverse",
+      "alpha": 1.0,
+      "artifact": "lambda_gating_locked.npy",
+      "artifact_hash": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98",
+      "metrics": {
+        "mse": 0.9238790273666382,
+        "mae": 0.7343993782997131
+      },
+      "beats_baseline": false,
+      "weight_summary_last_epoch": {
+        "weight_mean": 1.0,
+        "weight_std": 0.394556,
+        "weight_min": 0.082473,
+        "weight_max": 1.759762,
+        "weight_p10": 0.26723,
+        "weight_p50": 1.118748,
+        "weight_p90": 1.400954
+      }
+    },
+    "gating_weighted_direct_gpu_itr": {
+      "mode": "loss_weighting",
+      "polarity": "direct",
+      "alpha": 1.0,
+      "artifact": "lambda_gating_locked.npy",
+      "artifact_hash": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98",
+      "metrics": {
+        "mse": 0.8971740007400513,
+        "mae": 0.7207692861557007
+      },
+      "beats_baseline": false,
+      "weight_summary_last_epoch": {
+        "weight_mean": 1.0,
+        "weight_std": 0.76789,
+        "weight_min": 0.054646,
+        "weight_max": 3.701029,
+        "weight_p10": 0.220662,
+        "weight_p50": 0.748709,
+        "weight_p90": 2.315145
+      }
+    },
+    "gating_weighted_direct_alpha05_gpu_itr": {
+      "mode": "loss_weighting",
+      "polarity": "direct",
+      "alpha": 0.5,
+      "artifact": "lambda_gating_locked.npy",
+      "artifact_hash": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98",
+      "metrics": {
+        "mse": 0.8877124786376953,
+        "mae": 0.7152264714241028
+      },
+      "beats_baseline": true,
+      "weight_summary_last_epoch": {
+        "weight_mean": 1.0,
+        "weight_std": 0.383945,
+        "weight_min": 0.527323,
+        "weight_max": 2.350515,
+        "weight_p10": 0.610331,
+        "weight_p50": 0.874355,
+        "weight_p90": 1.657573
+      }
+    },
+    "gating_weighted_direct_alpha025_gpu_itr": {
+      "mode": "loss_weighting",
+      "polarity": "direct",
+      "alpha": 0.25,
+      "artifact": "lambda_gating_locked.npy",
+      "artifact_hash": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98",
+      "metrics": {
+        "mse": 0.8867132663726807,
+        "mae": 0.7141200304031372
+      },
+      "beats_baseline": true,
+      "weight_summary_last_epoch": {
+        "weight_mean": 1.0,
+        "weight_std": 0.191972,
+        "weight_min": 0.763662,
+        "weight_max": 1.675257,
+        "weight_p10": 0.805166,
+        "weight_p50": 0.937177,
+        "weight_p90": 1.328786
+      }
+    },
+    "best_gating_variant_so_far": {
+      "polarity": "direct",
+      "alpha": 0.25,
+      "metrics": {
+        "mse": 0.8867132663726807,
+        "mae": 0.7141200304031372
+      }
+    },
+    "local_slice_metrics": "completed",
+    "local_slice_metric_summary": "slice_metrics/phasec_round1_local_slice_metric_summary.json"
   },
   "ownership": {
     "canonical_master": true,
@@ -93,7 +203,9 @@
     "This manifest binds the current artifact bundle to one synthetic repo commit and one model repo commit.",
     "If a snapshot copy is placed inside the model repository later, that snapshot is not the canonical master.",
     "Commit this manifest in phaseC_artifacts after review so the artifact bundle gets its own versioned checkpoint.",
-    "Future Phase C runs must use the itr conda environment because it supports sm_120 on RTX 5060."
+    "Future Phase C runs must use the itr conda environment because it supports sm_120 on RTX 5060.",
+    "GPU reruns in itr show direct alpha-shrink works best so far; alpha=0.25 slightly beats baseline on global metrics.",
+    "Local slice metrics were added on 2026-03-25; direct alpha=0.25 improved global/pre_eval slightly but underperformed baseline on switch_window slices."
   ],
   "runtime_environment": {
     "python_executable": "C:\\Users\\cyl\\.conda\\envs\\itr\\python.exe",
