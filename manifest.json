@@ -1,11 +1,11 @@
 {
   "manifest_version": "1.0",
-  "artifact_bundle": "phasec-round1-regime-only-extra-time-feature",
-  "created_at": "2026-03-26T01:20:22+08:00",
+  "artifact_bundle": "phasec-round1-gating-regime-minimal",
+  "created_at": "2026-03-26T14:26:20+08:00",
   "canonical_artifacts_root": "C:/Users/cyl/Desktop/phaseC_artifacts",
   "artifact_repo": {
     "remote": "https://github.com/likepin/phaseC_artifacts.git",
-    "head_before_manifest": "de7908d9733ae9ffe271ebd1f33b5bb05353b133"
+    "head_before_manifest": "0e6f89b0557139eae89859a07db0f0a510d8167f"
   },
   "source_repositories": {
     "synthetic": {
@@ -16,14 +16,9 @@
     "model": {
       "repo_root": "C:/Users/cyl/Desktop/iTransformer-phasec-clean",
       "remote": "https://github.com/likepin/caci-itransformer.git",
-      "commit": "f27a78cab5272330fb6f8e55283c5566f66ab7a6",
-      "working_tree_dirty": true,
-      "dirty_files": [
-        "run.py",
-        "data_provider/data_factory.py",
-        "data_provider/data_loader.py",
-        "tools/phasec_switch_slice_eval.py"
-      ]
+      "commit": "f4060dbda69452242d8330e5df56e2d055f56938",
+      "working_tree_dirty": false,
+      "dirty_files": []
     }
   },
   "artifacts": {
@@ -62,7 +57,7 @@
       "mse": 0.891771674156189,
       "mae": 0.7162291407585144
     },
-    "next_step": "review first-round regime-only negative switch-window result before any joint gating+regime experiment",
+    "next_step": "decide whether to redesign regime input or stop after minimal gating+regime failed to show switch-window complementarity",
     "gating_only_loss_weighting_inverse": {
       "status": "passed",
       "mode": "loss_weighting",
@@ -220,7 +215,27 @@
       }
     },
     "regime_local_slice_metrics": "completed",
-    "regime_local_slice_metric_summary": "slice_metrics/phasec_round1_local_slice_metric_summary.json"
+    "regime_local_slice_metric_summary": "slice_metrics/phasec_round1_local_slice_metric_summary.json",
+    "gating_regime_minimal_gpu_itr": {
+      "gating_mode": "loss_weighting",
+      "gating_polarity": "direct",
+      "gating_alpha": 0.25,
+      "gating_artifact": "lambda_gating_locked.npy",
+      "gating_artifact_hash": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98",
+      "regime_mode": "extra_time_feature",
+      "regime_artifact": "lambda_regime_baseline.npy",
+      "regime_artifact_hash": "6db132725d81c7889924901173a9399221293406",
+      "metrics": {
+        "mse": 0.8864040970802307,
+        "mae": 0.7132958173751831
+      },
+      "beats_baseline_global": true,
+      "beats_gating_only_global": true,
+      "beats_baseline_on_switch_window": false,
+      "beats_gating_only_on_switch_window": false
+    },
+    "joint_local_slice_metrics": "slice_metrics/phasec_round1_local_slice_metric_summary.json",
+    "joint_interpretation": "Minimal joint gating+regime preserves the global gains of gating-only and improves post_eval further, but does not recover switch_window complementarity."
   },
   "ownership": {
     "canonical_master": true,
@@ -235,7 +250,8 @@
     "GPU reruns in itr show direct alpha-shrink works best so far; alpha=0.25 slightly beats baseline on global metrics.",
     "Local slice metrics were added on 2026-03-25; direct alpha=0.25 improved global/pre_eval slightly but underperformed baseline on switch_window slices.",
     "Regime-only extra_time_feature passed end-to-end in itr+GPU after sanitizing 49 leading NaNs in lambda_regime_baseline.npy.",
-    "First-round regime-only slightly improved global/post_eval but did not improve switch_window, switch_pre, or switch_post."
+    "First-round regime-only slightly improved global/post_eval but did not improve switch_window, switch_pre, or switch_post.",
+    "Minimal gating+regime in itr+GPU slightly improves global metrics over gating-only best, but switch_window, switch_pre, and switch_post remain worse than baseline and gating-only."
   ],
   "runtime_environment": {
     "python_executable": "C:\\Users\\cyl\\.conda\\envs\\itr\\python.exe",

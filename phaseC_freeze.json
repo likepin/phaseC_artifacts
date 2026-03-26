@@ -17,7 +17,9 @@
     "regime_noop_posthoc": "slice_metrics/regime_noop_posthoc.json",
     "regime_extra_time_feature_posthoc": "slice_metrics/regime_extra_time_feature_posthoc.json",
     "regime_noop_switch": "slice_metrics/regime_noop_switch/phasec_switch_slice_metrics.json",
-    "regime_extra_time_feature_switch": "slice_metrics/regime_extra_time_feature_switch/phasec_switch_slice_metrics.json"
+    "regime_extra_time_feature_switch": "slice_metrics/regime_extra_time_feature_switch/phasec_switch_slice_metrics.json",
+    "gating_regime_minimal_posthoc": "slice_metrics/gating_regime_minimal_posthoc.json",
+    "gating_regime_minimal_switch": "slice_metrics/gating_regime_minimal_switch/phasec_switch_slice_metrics.json"
   },
   "source_files": [
     "synthetic_step3_v2/exports_step5pp/phaseA_summary.md",
@@ -288,7 +290,7 @@
     }
   },
   "gating_only_improves_global_metrics": true,
-  "next_integration_step": "review first-round regime-only negative switch-window result before any joint gating+regime experiment",
+  "next_integration_step": "decide whether to redesign regime input after minimal gating+regime failed to recover switch-window complementarity",
   "gating_only_local_metrics": {
     "evaluation_unit": "prediction_elements_without_timestamp_dedup",
     "artifact": "slice_metrics/phasec_round1_local_slice_metric_summary.json",
@@ -375,6 +377,28 @@
   },
   "notes": [
     "Regime lambda artifact contained 49 NaNs at indices 0..48; the Phase C adapter now sanitizes them deterministically by linear interpolation with edge-value extrapolation.",
-    "First-round regime_only extra_time_feature slightly improved global/post_eval but degraded pre_eval and all switch-window slices."
-  ]
+    "First-round regime_only extra_time_feature slightly improved global/post_eval but degraded pre_eval and all switch-window slices.",
+    "Minimal gating+regime in itr+GPU preserved and slightly improved global metrics versus gating-only, but did not improve switch_window, switch_pre, or switch_post versus baseline or gating-only."
+  ],
+  "gating_regime_status": "implemented_and_validated",
+  "gating_regime_variant": {
+    "gating": {
+      "mode": "loss_weighting",
+      "polarity": "direct",
+      "alpha": 0.25,
+      "artifact": "lambda_gating_locked.npy",
+      "artifact_hash": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98"
+    },
+    "regime": {
+      "mode": "extra_time_feature",
+      "artifact": "lambda_regime_baseline.npy",
+      "artifact_hash": "6db132725d81c7889924901173a9399221293406"
+    }
+  },
+  "gating_regime_metrics": {
+    "mse": 0.8864040970802307,
+    "mae": 0.7132958173751831
+  },
+  "gating_regime_improves_switch_window": false,
+  "gating_regime_local_metrics": "slice_metrics/phasec_round1_local_slice_metric_summary.json"
 }

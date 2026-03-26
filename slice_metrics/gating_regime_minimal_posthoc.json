@@ -1,0 +1,50 @@
+{
+  "artifact_name": "phasec_posthoc_test_slice_metrics",
+  "results_dir": "C:\\Users\\cyl\\Desktop\\iTransformer-phasec-clean\\results\\pcgr1_iTransformer_phasec_synth_M_ft96_sl48_ll96_pl512_dm8_nh2_el1_dl2048_df1_fctimeF_ebTrue_dtgr1_projection_0",
+  "variant_name": "gating_regime_minimal_gpu",
+  "evaluation_unit": "prediction_elements_without_timestamp_dedup",
+  "indexing": "zero_based_half_open_[start,end)",
+  "pred_shape": [
+    618,
+    96,
+    10
+  ],
+  "test_window_count": 618,
+  "forecast_time_min": 2996,
+  "forecast_time_max": 5999,
+  "global_metrics_from_results": {
+    "mae": 0.7132958173751831,
+    "mse": 0.8864040970802307,
+    "rmse": 0.9414903521537781,
+    "mape": 1.375114917755127,
+    "mspe": 104.9640884399414
+  },
+  "slices": {
+    "pre_eval": {
+      "intervals": [
+        [
+          2900,
+          3400
+        ]
+      ],
+      "prediction_element_count": 29664,
+      "scalar_element_count": 296640,
+      "mae": 0.6893709301948547,
+      "mse": 0.9520582556724548,
+      "rmse": 0.9757347106933594
+    },
+    "post_eval": {
+      "intervals": [
+        [
+          5500,
+          6000
+        ]
+      ],
+      "prediction_element_count": 29664,
+      "scalar_element_count": 296640,
+      "mae": 0.7372207641601562,
+      "mse": 0.8207501173019409,
+      "rmse": 0.9059525728225708
+    }
+  }
+}

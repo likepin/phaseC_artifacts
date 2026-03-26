@@ -1,7 +1,7 @@
 {
   "artifact_name": "phaseC_round1_train_config",
-  "created_at": "2026-03-18T22:10:00+08:00",
-  "status": "regime_only_extra_time_feature_validated",
+  "created_at": "2026-03-26T14:26:20+08:00",
+  "status": "gating_regime_minimal_validated",
   "purpose": "Freeze and track the Phase C round-1 model-side training protocol and validated experiment states against the real iTransformer codebase.",
   "model_repo_root": "C:/Users/cyl/Desktop/iTransformer-phasec-clean",
   "code_references": {
@@ -367,7 +367,29 @@
       "evaluation_unit": "prediction_elements_without_timestamp_dedup",
       "artifact": "slice_metrics/phasec_round1_local_slice_metric_summary.json",
       "takeaway": "regime_noop matches baseline. regime_only extra_time_feature slightly improves global/post_eval but is worse on pre_eval and all switch slices."
-    }
+    },
+    "gating_regime_minimal_gpu_itr": {
+      "gating_mode": "loss_weighting",
+      "gating_polarity": "direct",
+      "gating_alpha": 0.25,
+      "gating_artifact": "lambda_gating_locked.npy",
+      "gating_artifact_hash": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98",
+      "regime_mode": "extra_time_feature",
+      "regime_artifact": "lambda_regime_baseline.npy",
+      "regime_artifact_hash": "6db132725d81c7889924901173a9399221293406",
+      "metrics": {
+        "mse": 0.8864040970802307,
+        "mae": 0.7132958173751831
+      },
+      "device": "cuda:0",
+      "runner": "conda run -n itr python",
+      "beats_baseline_global": true,
+      "beats_gating_only_global": true,
+      "beats_baseline_on_switch_window": false,
+      "beats_gating_only_on_switch_window": false
+    },
+    "joint_local_slice_metrics": "slice_metrics/phasec_round1_local_slice_metric_summary.json",
+    "joint_interpretation": "Minimal joint gating+regime preserves the global gains of gating-only and improves post_eval further, but switch_window, switch_pre, and switch_post remain worse than baseline and slightly worse than gating-only."
   },
   "next_step": {
     "arm": "regime-only",

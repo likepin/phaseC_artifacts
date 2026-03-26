@@ -200,8 +200,13 @@ These criteria are meant to decide whether the signal-side work from Phase A/Pha
 - Current interpretation:
   - first-round `regime-only` as implemented does not improve the switch window
   - it behaves more like a mild global/post-context feature than a switch-window recovery signal
+- Minimal `gating+regime` is now also validated under the same frozen protocol:
+  - `gating`: `loss_weighting + direct + alpha=0.25`
+  - `regime`: `extra_time_feature`
+  - global: `mse=0.8864041`, `mae=0.7132958`
+  - interpretation: global is slightly better than the best `gating-only` run, but `switch_window`, `switch_pre`, and `switch_post` are still worse than baseline and slightly worse than `gating-only`; the minimal joint design does not demonstrate complementarity.
 - Next step:
-  - review whether `regime-only` should be redesigned before any joint `gating+regime` experiment
+  - decide whether `regime` should be redesigned before any further joint or controller-style integration
 
 ## Canonical Runtime Environment
 - Conda env: `itr`
