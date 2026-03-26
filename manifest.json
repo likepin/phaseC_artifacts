@@ -1,336 +1,340 @@
-{
-  "manifest_version": "1.0",
-  "artifact_bundle": "phasec-round1-gating-regime-minimal",
-  "created_at": "2026-03-26T14:26:20+08:00",
-  "canonical_artifacts_root": "C:/Users/cyl/Desktop/phaseC_artifacts",
-  "artifact_repo": {
-    "remote": "https://github.com/likepin/phaseC_artifacts.git",
-    "head_before_manifest": "0e6f89b0557139eae89859a07db0f0a510d8167f"
-  },
-  "source_repositories": {
-    "synthetic": {
-      "repo_root": "C:/Users/cyl/Desktop/data",
-      "remote": "git@github.com:likepin/data.git",
-      "commit": "3256cc5632212ef2dae0bd2238f688748746a2d1"
-    },
-    "model": {
-      "repo_root": "C:/Users/cyl/Desktop/iTransformer-phasec-clean",
-      "remote": "https://github.com/likepin/caci-itransformer.git",
-      "commit": "f4060dbda69452242d8330e5df56e2d055f56938",
-      "working_tree_dirty": false,
-      "dirty_files": []
-    }
-  },
-  "artifacts": {
-    "freeze": "phaseC_freeze.json",
-    "input_spec": "phaseC_input_spec.md",
-    "split": "phaseC_round1_split.json",
-    "training_config": "phaseC_round1_train_config.json",
-    "gating_lambda_npy": "lambda_gating_locked.npy",
-    "gating_lambda_npz": "lambda_gating_locked.npz",
-    "regime_lambda_npy": "lambda_regime_baseline.npy",
-    "regime_lambda_npz": "lambda_regime_baseline.npz",
-    "readme": "README.md",
-    "local_slice_metric_summary": "slice_metrics/phasec_round1_local_slice_metric_summary.json"
-  },
-  "signal_inputs": {
-    "gating": {
-      "name": "score_gating",
-      "window": 40,
-      "k": 2,
-      "lambda_hash_round6": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98"
-    },
-    "regime": {
-      "name": "score_regime",
-      "window": 50,
-      "k": 2,
-      "lambda_hash_round6": "6db132725d81c7889924901173a9399221293406"
-    }
-  },
-  "phase_c_status": {
-    "protocol_alignment": "complete",
-    "synthetic_dataset_adapter": "implemented_and_validated",
-    "seed_override": "implemented_and_validated",
-    "baseline_validation": "passed",
-    "gating_noop_control": "passed",
-    "baseline_metrics": {
-      "mse": 0.891771674156189,
-      "mae": 0.7162291407585144
-    },
-    "next_step": "Freeze current Phase C results. If continuing, redesign the joint route to preserve switch-window gains while reducing the stronger global/post trade-off.",
-    "gating_only_loss_weighting_inverse": {
-      "status": "passed",
-      "mode": "loss_weighting",
-      "polarity": "inverse",
-      "artifact": "lambda_gating_locked.npy",
-      "artifact_hash": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98",
-      "metrics": {
-        "mse": 0.9256010055541992,
-        "mae": 0.7353431582450867
-      },
-      "beats_baseline": false,
-      "weight_summary_last_epoch": {
-        "weight_mean": 1.0,
-        "weight_std": 0.393812,
-        "weight_min": 0.090636,
-        "weight_max": 1.663826,
-        "weight_p10": 0.266587,
-        "weight_p50": 1.11986,
-        "weight_p90": 1.400231
-      }
-    },
-    "baseline_gpu_itr": {
-      "status": "passed",
-      "metrics": {
-        "mse": 0.8902064561843872,
-        "mae": 0.7155085802078247
-      }
-    },
-    "gating_noop_gpu_itr": {
-      "status": "passed",
-      "metrics": {
-        "mse": 0.8902064561843872,
-        "mae": 0.7155085802078247
-      },
-      "matches_baseline": true
-    },
-    "gating_weighted_inverse_gpu_itr": {
-      "mode": "loss_weighting",
-      "polarity": "inverse",
-      "alpha": 1.0,
-      "artifact": "lambda_gating_locked.npy",
-      "artifact_hash": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98",
-      "metrics": {
-        "mse": 0.9238790273666382,
-        "mae": 0.7343993782997131
-      },
-      "beats_baseline": false,
-      "weight_summary_last_epoch": {
-        "weight_mean": 1.0,
-        "weight_std": 0.394556,
-        "weight_min": 0.082473,
-        "weight_max": 1.759762,
-        "weight_p10": 0.26723,
-        "weight_p50": 1.118748,
-        "weight_p90": 1.400954
-      }
-    },
-    "gating_weighted_direct_gpu_itr": {
-      "mode": "loss_weighting",
-      "polarity": "direct",
-      "alpha": 1.0,
-      "artifact": "lambda_gating_locked.npy",
-      "artifact_hash": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98",
-      "metrics": {
-        "mse": 0.8971740007400513,
-        "mae": 0.7207692861557007
-      },
-      "beats_baseline": false,
-      "weight_summary_last_epoch": {
-        "weight_mean": 1.0,
-        "weight_std": 0.76789,
-        "weight_min": 0.054646,
-        "weight_max": 3.701029,
-        "weight_p10": 0.220662,
-        "weight_p50": 0.748709,
-        "weight_p90": 2.315145
-      }
-    },
-    "gating_weighted_direct_alpha05_gpu_itr": {
-      "mode": "loss_weighting",
-      "polarity": "direct",
-      "alpha": 0.5,
-      "artifact": "lambda_gating_locked.npy",
-      "artifact_hash": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98",
-      "metrics": {
-        "mse": 0.8877124786376953,
-        "mae": 0.7152264714241028
-      },
-      "beats_baseline": true,
-      "weight_summary_last_epoch": {
-        "weight_mean": 1.0,
-        "weight_std": 0.383945,
-        "weight_min": 0.527323,
-        "weight_max": 2.350515,
-        "weight_p10": 0.610331,
-        "weight_p50": 0.874355,
-        "weight_p90": 1.657573
-      }
-    },
-    "gating_weighted_direct_alpha025_gpu_itr": {
-      "mode": "loss_weighting",
-      "polarity": "direct",
-      "alpha": 0.25,
-      "artifact": "lambda_gating_locked.npy",
-      "artifact_hash": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98",
-      "metrics": {
-        "mse": 0.8867132663726807,
-        "mae": 0.7141200304031372
-      },
-      "beats_baseline": true,
-      "weight_summary_last_epoch": {
-        "weight_mean": 1.0,
-        "weight_std": 0.191972,
-        "weight_min": 0.763662,
-        "weight_max": 1.675257,
-        "weight_p10": 0.805166,
-        "weight_p50": 0.937177,
-        "weight_p90": 1.328786
-      }
-    },
-    "best_gating_variant_so_far": {
-      "polarity": "direct",
-      "alpha": 0.25,
-      "metrics": {
-        "mse": 0.8867132663726807,
-        "mae": 0.7141200304031372
-      }
-    },
-    "local_slice_metrics": "completed",
-    "local_slice_metric_summary": "slice_metrics/phasec_round1_local_slice_metric_summary.json",
-    "regime_noop_gpu_itr": {
-      "status": "passed",
-      "metrics": {
-        "mse": 0.8902064561843872,
-        "mae": 0.7155085802078247
-      },
-      "matches_baseline": true
-    },
-    "regime_only_extra_time_feature_gpu_itr": {
-      "mode": "extra_time_feature",
-      "artifact": "lambda_regime_baseline.npy",
-      "artifact_hash": "6db132725d81c7889924901173a9399221293406",
-      "metrics": {
-        "mse": 0.8901235461235046,
-        "mae": 0.7147436141967773
-      },
-      "beats_baseline_global": true,
-      "beats_baseline_on_switch_window": false
-    },
-    "best_regime_variant_so_far": {
-      "variant": "regime_only_light_aux_input_gpu",
-      "mse": 0.9015757441520691,
-      "mae": 0.7267856001853943,
-      "switch_window_mse": 0.6770349740982056,
-      "switch_window_mae": 0.5970309376716614,
-      "takeaway": "best switch-window recovery among tested regime-only paths, with negative global/post trade-off"
-    },
-    "regime_local_slice_metrics": "completed",
-    "regime_local_slice_metric_summary": {
-      "summary_artifact": "slice_metrics/phasec_round1_local_slice_metric_summary.json",
-      "regime_only_extra_time_feature": "global near baseline; switch-window negative",
-      "regime_only_light_aux_input": "switch-window positive; global/post negative"
-    },
-    "gating_regime_minimal_gpu_itr": {
-      "gating_mode": "loss_weighting",
-      "gating_polarity": "direct",
-      "gating_alpha": 0.25,
-      "gating_artifact": "lambda_gating_locked.npy",
-      "gating_artifact_hash": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98",
-      "regime_mode": "extra_time_feature",
-      "regime_artifact": "lambda_regime_baseline.npy",
-      "regime_artifact_hash": "6db132725d81c7889924901173a9399221293406",
-      "metrics": {
-        "mse": 0.8864040970802307,
-        "mae": 0.7132958173751831
-      },
-      "beats_baseline_global": true,
-      "beats_gating_only_global": true,
-      "beats_baseline_on_switch_window": false,
-      "beats_gating_only_on_switch_window": false
-    },
-    "joint_local_slice_metrics": "slice_metrics/phasec_round1_local_slice_metric_summary.json",
-    "joint_interpretation": "With regime light_aux_input, the joint path recovers switch_window, switch_pre, and switch_post above baseline and gating-only, but the global and post_eval trade-off is substantially worse than gating-only.",
-    "regime_only_light_aux_input_gpu_itr": {
-      "status": "validated",
-      "runtime": "itr_gpu",
-      "mode": "light_aux_input",
-      "global_metrics": {
-        "mse": 0.9015757441520691,
-        "mae": 0.7267856001853943
-      },
-      "slice_metrics": {
-        "pre_eval": {
-          "mse": 0.9445242881774902,
-          "mae": 0.6909926533699036
-        },
-        "post_eval": {
-          "mse": 0.8586272597312927,
-          "mae": 0.762578547000885
-        },
-        "switch_window": {
-          "mse": 0.6770349740982056,
-          "mae": 0.5970309376716614
-        },
-        "switch_pre": {
-          "mse": 0.34920498728752136,
-          "mae": 0.4297652542591095
-        },
-        "switch_post": {
-          "mse": 1.0048649311065674,
-          "mae": 0.7642967700958252
-        }
-      },
-      "takeaway": "improves switch-window metrics versus baseline, but degrades global/post metrics"
-    },
-    "gating_regime_light_aux_input_gpu_itr": {
-      "status": "validated",
-      "runtime": "itr_gpu",
-      "gating_mode": "loss_weighting",
-      "gating_polarity": "direct",
-      "gating_alpha": 0.25,
-      "regime_mode": "light_aux_input",
-      "metrics": {
-        "global": {
-          "mse": 0.9047273993492126,
-          "mae": 0.7288652658462524
-        },
-        "pre_eval": {
-          "mse": 0.94024658203125,
-          "mae": 0.6875647306442261
-        },
-        "post_eval": {
-          "mse": 0.8692085146903992,
-          "mae": 0.7701656818389893
-        },
-        "switch_window": {
-          "mse": 0.6802034974098206,
-          "mae": 0.5984366536140442
-        },
-        "switch_pre": {
-          "mse": 0.35113760828971863,
-          "mae": 0.43087121844291687
-        },
-        "switch_post": {
-          "mse": 1.0092693567276,
-          "mae": 0.7660021185874939
-        }
-      },
-      "beats_baseline_on_switch_window": true,
-      "beats_gating_only_on_switch_window": true,
-      "takeaway": "joint light_aux_input restores switch-window slices above baseline and gating-only, but with a larger global/post trade-off."
-    }
-  },
-  "ownership": {
-    "canonical_master": true,
-    "synthetic_project_role": "writes and updates this artifact bundle",
-    "itransformer_project_role": "reads from this bundle and does not write back"
-  },
-  "notes": [
-    "This manifest binds the current artifact bundle to one synthetic repo commit and one model repo commit.",
-    "If a snapshot copy is placed inside the model repository later, that snapshot is not the canonical master.",
-    "Commit this manifest in phaseC_artifacts after review so the artifact bundle gets its own versioned checkpoint.",
-    "Future Phase C runs must use the itr conda environment because it supports sm_120 on RTX 5060.",
-    "GPU reruns in itr show direct alpha-shrink works best so far; alpha=0.25 slightly beats baseline on global metrics.",
-    "Local slice metrics were added on 2026-03-25; direct alpha=0.25 improved global/pre_eval slightly but underperformed baseline on switch_window slices.",
-    "Regime-only extra_time_feature passed end-to-end in itr+GPU after sanitizing 49 leading NaNs in lambda_regime_baseline.npy.",
-    "First-round regime-only slightly improved global/post_eval but did not improve switch_window, switch_pre, or switch_post.",
-    "Minimal gating+regime in itr+GPU slightly improves global metrics over gating-only best, but switch_window, switch_pre, and switch_post remain worse than baseline and gating-only."
-  ],
-  "runtime_environment": {
-    "python_executable": "C:\\Users\\cyl\\.conda\\envs\\itr\\python.exe",
-    "conda_env_name": "itr",
-    "runner": "conda run -n itr python",
-    "status": "canonical_for_future_phase_c_runs"
-  }
+﻿{
+    "manifest_version":  "1.0",
+    "artifact_bundle":  "phasec-round1-gating-regime-minimal",
+    "created_at":  "2026-03-26T14:26:20+08:00",
+    "canonical_artifacts_root":  "C:/Users/cyl/Desktop/phaseC_artifacts",
+    "artifact_repo":  {
+                          "remote":  "https://github.com/likepin/phaseC_artifacts.git",
+                          "head_before_manifest":  "0e6f89b0557139eae89859a07db0f0a510d8167f"
+                      },
+    "source_repositories":  {
+                                "synthetic":  {
+                                                  "repo_root":  "C:/Users/cyl/Desktop/data",
+                                                  "remote":  "git@github.com:likepin/data.git",
+                                                  "commit":  "3256cc5632212ef2dae0bd2238f688748746a2d1"
+                                              },
+                                "model":  {
+                                              "repo_root":  "C:/Users/cyl/Desktop/iTransformer-phasec-clean",
+                                              "remote":  "https://github.com/likepin/caci-itransformer.git",
+                                              "commit":  "f4060dbda69452242d8330e5df56e2d055f56938",
+                                              "working_tree_dirty":  false,
+                                              "dirty_files":  [
+
+                                                              ]
+                                          }
+                            },
+    "artifacts":  {
+                      "freeze":  "phaseC_freeze.json",
+                      "input_spec":  "phaseC_input_spec.md",
+                      "split":  "phaseC_round1_split.json",
+                      "training_config":  "phaseC_round1_train_config.json",
+                      "gating_lambda_npy":  "lambda_gating_locked.npy",
+                      "gating_lambda_npz":  "lambda_gating_locked.npz",
+                      "regime_lambda_npy":  "lambda_regime_baseline.npy",
+                      "regime_lambda_npz":  "lambda_regime_baseline.npz",
+                      "readme":  "README.md",
+                      "local_slice_metric_summary":  "slice_metrics/phasec_round1_local_slice_metric_summary.json",
+                      "phasec_summary":  "phaseC_summary.md"
+                  },
+    "signal_inputs":  {
+                          "gating":  {
+                                         "name":  "score_gating",
+                                         "window":  40,
+                                         "k":  2,
+                                         "lambda_hash_round6":  "f4bc9d33f862bbd93db5af7ae20b4edb995cae98"
+                                     },
+                          "regime":  {
+                                         "name":  "score_regime",
+                                         "window":  50,
+                                         "k":  2,
+                                         "lambda_hash_round6":  "6db132725d81c7889924901173a9399221293406"
+                                     }
+                      },
+    "phase_c_status":  {
+                           "protocol_alignment":  "complete",
+                           "synthetic_dataset_adapter":  "implemented_and_validated",
+                           "seed_override":  "implemented_and_validated",
+                           "baseline_validation":  "passed",
+                           "gating_noop_control":  "passed",
+                           "baseline_metrics":  {
+                                                    "mse":  0.891771674156189,
+                                                    "mae":  0.7162291407585144
+                                                },
+                           "next_step":  "Phase C closed. If continuing, enter Phase D and only test scoped joint mechanisms that try to keep gating global gains while localizing regime switch-window effects.",
+                           "gating_only_loss_weighting_inverse":  {
+                                                                      "status":  "passed",
+                                                                      "mode":  "loss_weighting",
+                                                                      "polarity":  "inverse",
+                                                                      "artifact":  "lambda_gating_locked.npy",
+                                                                      "artifact_hash":  "f4bc9d33f862bbd93db5af7ae20b4edb995cae98",
+                                                                      "metrics":  {
+                                                                                      "mse":  0.9256010055541992,
+                                                                                      "mae":  0.7353431582450867
+                                                                                  },
+                                                                      "beats_baseline":  false,
+                                                                      "weight_summary_last_epoch":  {
+                                                                                                        "weight_mean":  1.0,
+                                                                                                        "weight_std":  0.393812,
+                                                                                                        "weight_min":  0.090636,
+                                                                                                        "weight_max":  1.663826,
+                                                                                                        "weight_p10":  0.266587,
+                                                                                                        "weight_p50":  1.11986,
+                                                                                                        "weight_p90":  1.400231
+                                                                                                    }
+                                                                  },
+                           "baseline_gpu_itr":  {
+                                                    "status":  "passed",
+                                                    "metrics":  {
+                                                                    "mse":  0.8902064561843872,
+                                                                    "mae":  0.7155085802078247
+                                                                }
+                                                },
+                           "gating_noop_gpu_itr":  {
+                                                       "status":  "passed",
+                                                       "metrics":  {
+                                                                       "mse":  0.8902064561843872,
+                                                                       "mae":  0.7155085802078247
+                                                                   },
+                                                       "matches_baseline":  true
+                                                   },
+                           "gating_weighted_inverse_gpu_itr":  {
+                                                                   "mode":  "loss_weighting",
+                                                                   "polarity":  "inverse",
+                                                                   "alpha":  1.0,
+                                                                   "artifact":  "lambda_gating_locked.npy",
+                                                                   "artifact_hash":  "f4bc9d33f862bbd93db5af7ae20b4edb995cae98",
+                                                                   "metrics":  {
+                                                                                   "mse":  0.9238790273666382,
+                                                                                   "mae":  0.7343993782997131
+                                                                               },
+                                                                   "beats_baseline":  false,
+                                                                   "weight_summary_last_epoch":  {
+                                                                                                     "weight_mean":  1.0,
+                                                                                                     "weight_std":  0.394556,
+                                                                                                     "weight_min":  0.082473,
+                                                                                                     "weight_max":  1.759762,
+                                                                                                     "weight_p10":  0.26723,
+                                                                                                     "weight_p50":  1.118748,
+                                                                                                     "weight_p90":  1.400954
+                                                                                                 }
+                                                               },
+                           "gating_weighted_direct_gpu_itr":  {
+                                                                  "mode":  "loss_weighting",
+                                                                  "polarity":  "direct",
+                                                                  "alpha":  1.0,
+                                                                  "artifact":  "lambda_gating_locked.npy",
+                                                                  "artifact_hash":  "f4bc9d33f862bbd93db5af7ae20b4edb995cae98",
+                                                                  "metrics":  {
+                                                                                  "mse":  0.8971740007400513,
+                                                                                  "mae":  0.7207692861557007
+                                                                              },
+                                                                  "beats_baseline":  false,
+                                                                  "weight_summary_last_epoch":  {
+                                                                                                    "weight_mean":  1.0,
+                                                                                                    "weight_std":  0.76789,
+                                                                                                    "weight_min":  0.054646,
+                                                                                                    "weight_max":  3.701029,
+                                                                                                    "weight_p10":  0.220662,
+                                                                                                    "weight_p50":  0.748709,
+                                                                                                    "weight_p90":  2.315145
+                                                                                                }
+                                                              },
+                           "gating_weighted_direct_alpha05_gpu_itr":  {
+                                                                          "mode":  "loss_weighting",
+                                                                          "polarity":  "direct",
+                                                                          "alpha":  0.5,
+                                                                          "artifact":  "lambda_gating_locked.npy",
+                                                                          "artifact_hash":  "f4bc9d33f862bbd93db5af7ae20b4edb995cae98",
+                                                                          "metrics":  {
+                                                                                          "mse":  0.8877124786376953,
+                                                                                          "mae":  0.7152264714241028
+                                                                                      },
+                                                                          "beats_baseline":  true,
+                                                                          "weight_summary_last_epoch":  {
+                                                                                                            "weight_mean":  1.0,
+                                                                                                            "weight_std":  0.383945,
+                                                                                                            "weight_min":  0.527323,
+                                                                                                            "weight_max":  2.350515,
+                                                                                                            "weight_p10":  0.610331,
+                                                                                                            "weight_p50":  0.874355,
+                                                                                                            "weight_p90":  1.657573
+                                                                                                        }
+                                                                      },
+                           "gating_weighted_direct_alpha025_gpu_itr":  {
+                                                                           "mode":  "loss_weighting",
+                                                                           "polarity":  "direct",
+                                                                           "alpha":  0.25,
+                                                                           "artifact":  "lambda_gating_locked.npy",
+                                                                           "artifact_hash":  "f4bc9d33f862bbd93db5af7ae20b4edb995cae98",
+                                                                           "metrics":  {
+                                                                                           "mse":  0.8867132663726807,
+                                                                                           "mae":  0.7141200304031372
+                                                                                       },
+                                                                           "beats_baseline":  true,
+                                                                           "weight_summary_last_epoch":  {
+                                                                                                             "weight_mean":  1.0,
+                                                                                                             "weight_std":  0.191972,
+                                                                                                             "weight_min":  0.763662,
+                                                                                                             "weight_max":  1.675257,
+                                                                                                             "weight_p10":  0.805166,
+                                                                                                             "weight_p50":  0.937177,
+                                                                                                             "weight_p90":  1.328786
+                                                                                                         }
+                                                                       },
+                           "best_gating_variant_so_far":  {
+                                                              "polarity":  "direct",
+                                                              "alpha":  0.25,
+                                                              "metrics":  {
+                                                                              "mse":  0.8867132663726807,
+                                                                              "mae":  0.7141200304031372
+                                                                          }
+                                                          },
+                           "local_slice_metrics":  "completed",
+                           "local_slice_metric_summary":  "slice_metrics/phasec_round1_local_slice_metric_summary.json",
+                           "regime_noop_gpu_itr":  {
+                                                       "status":  "passed",
+                                                       "metrics":  {
+                                                                       "mse":  0.8902064561843872,
+                                                                       "mae":  0.7155085802078247
+                                                                   },
+                                                       "matches_baseline":  true
+                                                   },
+                           "regime_only_extra_time_feature_gpu_itr":  {
+                                                                          "mode":  "extra_time_feature",
+                                                                          "artifact":  "lambda_regime_baseline.npy",
+                                                                          "artifact_hash":  "6db132725d81c7889924901173a9399221293406",
+                                                                          "metrics":  {
+                                                                                          "mse":  0.8901235461235046,
+                                                                                          "mae":  0.7147436141967773
+                                                                                      },
+                                                                          "beats_baseline_global":  true,
+                                                                          "beats_baseline_on_switch_window":  false
+                                                                      },
+                           "best_regime_variant_so_far":  {
+                                                              "variant":  "regime_only_light_aux_input_gpu",
+                                                              "mse":  0.9015757441520691,
+                                                              "mae":  0.7267856001853943,
+                                                              "switch_window_mse":  0.6770349740982056,
+                                                              "switch_window_mae":  0.5970309376716614,
+                                                              "takeaway":  "best switch-window recovery among tested regime-only paths, with negative global/post trade-off"
+                                                          },
+                           "regime_local_slice_metrics":  "completed",
+                           "regime_local_slice_metric_summary":  {
+                                                                     "summary_artifact":  "slice_metrics/phasec_round1_local_slice_metric_summary.json",
+                                                                     "regime_only_extra_time_feature":  "global near baseline; switch-window negative",
+                                                                     "regime_only_light_aux_input":  "switch-window positive; global/post negative"
+                                                                 },
+                           "gating_regime_minimal_gpu_itr":  {
+                                                                 "gating_mode":  "loss_weighting",
+                                                                 "gating_polarity":  "direct",
+                                                                 "gating_alpha":  0.25,
+                                                                 "gating_artifact":  "lambda_gating_locked.npy",
+                                                                 "gating_artifact_hash":  "f4bc9d33f862bbd93db5af7ae20b4edb995cae98",
+                                                                 "regime_mode":  "extra_time_feature",
+                                                                 "regime_artifact":  "lambda_regime_baseline.npy",
+                                                                 "regime_artifact_hash":  "6db132725d81c7889924901173a9399221293406",
+                                                                 "metrics":  {
+                                                                                 "mse":  0.8864040970802307,
+                                                                                 "mae":  0.7132958173751831
+                                                                             },
+                                                                 "beats_baseline_global":  true,
+                                                                 "beats_gating_only_global":  true,
+                                                                 "beats_baseline_on_switch_window":  false,
+                                                                 "beats_gating_only_on_switch_window":  false
+                                                             },
+                           "joint_local_slice_metrics":  "slice_metrics/phasec_round1_local_slice_metric_summary.json",
+                           "joint_interpretation":  "With regime light_aux_input, the joint path recovers switch_window, switch_pre, and switch_post above baseline and gating-only, but the global and post_eval trade-off is substantially worse than gating-only.",
+                           "regime_only_light_aux_input_gpu_itr":  {
+                                                                       "status":  "validated",
+                                                                       "runtime":  "itr_gpu",
+                                                                       "mode":  "light_aux_input",
+                                                                       "global_metrics":  {
+                                                                                              "mse":  0.9015757441520691,
+                                                                                              "mae":  0.7267856001853943
+                                                                                          },
+                                                                       "slice_metrics":  {
+                                                                                             "pre_eval":  {
+                                                                                                              "mse":  0.9445242881774902,
+                                                                                                              "mae":  0.6909926533699036
+                                                                                                          },
+                                                                                             "post_eval":  {
+                                                                                                               "mse":  0.8586272597312927,
+                                                                                                               "mae":  0.762578547000885
+                                                                                                           },
+                                                                                             "switch_window":  {
+                                                                                                                   "mse":  0.6770349740982056,
+                                                                                                                   "mae":  0.5970309376716614
+                                                                                                               },
+                                                                                             "switch_pre":  {
+                                                                                                                "mse":  0.34920498728752136,
+                                                                                                                "mae":  0.4297652542591095
+                                                                                                            },
+                                                                                             "switch_post":  {
+                                                                                                                 "mse":  1.0048649311065674,
+                                                                                                                 "mae":  0.7642967700958252
+                                                                                                             }
+                                                                                         },
+                                                                       "takeaway":  "improves switch-window metrics versus baseline, but degrades global/post metrics"
+                                                                   },
+                           "gating_regime_light_aux_input_gpu_itr":  {
+                                                                         "status":  "validated",
+                                                                         "runtime":  "itr_gpu",
+                                                                         "gating_mode":  "loss_weighting",
+                                                                         "gating_polarity":  "direct",
+                                                                         "gating_alpha":  0.25,
+                                                                         "regime_mode":  "light_aux_input",
+                                                                         "metrics":  {
+                                                                                         "global":  {
+                                                                                                        "mse":  0.9047273993492126,
+                                                                                                        "mae":  0.7288652658462524
+                                                                                                    },
+                                                                                         "pre_eval":  {
+                                                                                                          "mse":  0.94024658203125,
+                                                                                                          "mae":  0.6875647306442261
+                                                                                                      },
+                                                                                         "post_eval":  {
+                                                                                                           "mse":  0.8692085146903992,
+                                                                                                           "mae":  0.7701656818389893
+                                                                                                       },
+                                                                                         "switch_window":  {
+                                                                                                               "mse":  0.6802034974098206,
+                                                                                                               "mae":  0.5984366536140442
+                                                                                                           },
+                                                                                         "switch_pre":  {
+                                                                                                            "mse":  0.35113760828971863,
+                                                                                                            "mae":  0.43087121844291687
+                                                                                                        },
+                                                                                         "switch_post":  {
+                                                                                                             "mse":  1.0092693567276,
+                                                                                                             "mae":  0.7660021185874939
+                                                                                                         }
+                                                                                     },
+                                                                         "beats_baseline_on_switch_window":  true,
+                                                                         "beats_gating_only_on_switch_window":  true,
+                                                                         "takeaway":  "joint light_aux_input restores switch-window slices above baseline and gating-only, but with a larger global/post trade-off."
+                                                                     },
+                           "closeout_summary":  "phaseC_summary.md"
+                       },
+    "ownership":  {
+                      "canonical_master":  true,
+                      "synthetic_project_role":  "writes and updates this artifact bundle",
+                      "itransformer_project_role":  "reads from this bundle and does not write back"
+                  },
+    "notes":  [
+                  "This manifest binds the current artifact bundle to one synthetic repo commit and one model repo commit.",
+                  "If a snapshot copy is placed inside the model repository later, that snapshot is not the canonical master.",
+                  "Commit this manifest in phaseC_artifacts after review so the artifact bundle gets its own versioned checkpoint.",
+                  "Future Phase C runs must use the itr conda environment because it supports sm_120 on RTX 5060.",
+                  "GPU reruns in itr show direct alpha-shrink works best so far; alpha=0.25 slightly beats baseline on global metrics.",
+                  "Local slice metrics were added on 2026-03-25; direct alpha=0.25 improved global/pre_eval slightly but underperformed baseline on switch_window slices.",
+                  "Regime-only extra_time_feature passed end-to-end in itr+GPU after sanitizing 49 leading NaNs in lambda_regime_baseline.npy.",
+                  "First-round regime-only slightly improved global/post_eval but did not improve switch_window, switch_pre, or switch_post.",
+                  "Minimal gating+regime in itr+GPU slightly improves global metrics over gating-only best, but switch_window, switch_pre, and switch_post remain worse than baseline and gating-only."
+              ],
+    "runtime_environment":  {
+                                "python_executable":  "C:\\Users\\cyl\\.conda\\envs\\itr\\python.exe",
+                                "conda_env_name":  "itr",
+                                "runner":  "conda run -n itr python",
+                                "status":  "canonical_for_future_phase_c_runs"
+                            }
 }

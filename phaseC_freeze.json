@@ -1,479 +1,482 @@
-{
-  "frozen_timestamp": "2026-03-18T20:54:14.5719628+08:00",
-  "purpose": "Frozen Phase C round-1 signal inputs, protocol, and validated model-side experiment states.",
-  "benchmark_version": "phaseA_v0.1_synth",
-  "dataset": "synthetic",
-  "canonical_artifacts_root": "C:/Users/cyl/Desktop/phaseC_artifacts",
-  "artifacts_manifest": {
-    "readme": "README.md",
-    "input_spec": "phaseC_input_spec.md",
-    "split_artifact": "phaseC_round1_split.json",
-    "training_config": "phaseC_round1_train_config.json",
-    "gating_lambda_npy": "lambda_gating_locked.npy",
-    "gating_lambda_npz": "lambda_gating_locked.npz",
-    "regime_lambda_npy": "lambda_regime_baseline.npy",
-    "regime_lambda_npz": "lambda_regime_baseline.npz",
-    "local_slice_metric_summary": "slice_metrics/phasec_round1_local_slice_metric_summary.json",
-    "regime_noop_posthoc": "slice_metrics/regime_noop_posthoc.json",
-    "regime_extra_time_feature_posthoc": "slice_metrics/regime_extra_time_feature_posthoc.json",
-    "regime_noop_switch": "slice_metrics/regime_noop_switch/phasec_switch_slice_metrics.json",
-    "regime_extra_time_feature_switch": "slice_metrics/regime_extra_time_feature_switch/phasec_switch_slice_metrics.json",
-    "gating_regime_minimal_posthoc": "slice_metrics/gating_regime_minimal_posthoc.json",
-    "gating_regime_minimal_switch": "slice_metrics/gating_regime_minimal_switch/phasec_switch_slice_metrics.json"
-  },
-  "source_files": [
-    "synthetic_step3_v2/exports_step5pp/phaseA_summary.md",
-    "synthetic_step3_v2/exports_step5pp/phaseA_rulebook.md",
-    "synthetic_step3_v2/exports_step5pp/phaseB_locked_variants.json",
-    "synthetic_step3_v2/exports_step5pp/phaseB_baseline_regime.json",
-    "synthetic_step3_v2/exports_step5pp/compare/compare_regime_iteration.csv",
-    "synthetic_step3_v2/exports_step5pp/phaseC_round1_split.json",
-    "synthetic_step3_v2/exports_step5pp/phaseC_round1_train_config.json",
-    "synthetic_step3_v2/exports_step5pp/phaseC_staging/lambda_regime_baseline.json",
-    "C:/Users/cyl/Desktop/iTransformer-phasec-clean/run.py",
-    "C:/Users/cyl/Desktop/iTransformer-phasec-clean/experiments/exp_long_term_forecasting.py",
-    "C:/Users/cyl/Desktop/iTransformer-phasec-clean/data_provider/data_factory.py",
-    "C:/Users/cyl/Desktop/iTransformer-phasec-clean/data_provider/data_loader.py",
-    "C:/Users/cyl/Desktop/iTransformer-phasec-clean/tools/phasec_posthoc_test_slices.py",
-    "C:/Users/cyl/Desktop/iTransformer-phasec-clean/tools/phasec_switch_slice_eval.py"
-  ],
-  "split_artifact": "phaseC_round1_split.json",
-  "training_config_artifact": "phaseC_round1_train_config.json",
-  "input_spec_artifact": "phaseC_input_spec.md",
-  "gating_lambda_artifact": {
-    "npy": "lambda_gating_locked.npy",
-    "npz": "lambda_gating_locked.npz"
-  },
-  "regime_lambda_artifact": {
-    "npy": "lambda_regime_baseline.npy",
-    "npz": "lambda_regime_baseline.npz"
-  },
-  "locked_gating_variant": {
-    "name": "score_gating",
-    "window": 40,
-    "k": 2,
-    "lambda_hash_round6": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98",
-    "source_csv": "synthetic_step3_v2/exports_step4/rescored_results_20260311_162910.csv",
-    "selected_rank": 1,
-    "lock_reason": "phaseB_locked_from_current_variant",
-    "locked_at": "2026-03-11T16:56:45"
-  },
-  "accepted_regime_baseline": {
-    "name": "score_regime",
-    "window": 50,
-    "k": 2,
-    "lambda_hash_round6": "6db132725d81c7889924901173a9399221293406",
-    "source_csv": "synthetic_step3_v2/exports_step4/rescored_results_20260306_142434.csv",
-    "selected_rank": 2,
-    "artifact_source": {
-      "type": "reconstructed_from_historical_code",
-      "source_commit": "6bcfe93",
-      "source_file": "step5pp_utils.py",
-      "local_staging_meta": "synthetic_step3_v2/exports_step5pp/phaseC_staging/lambda_regime_baseline.json"
-    },
-    "switch_band_correct_rate": 0.83,
-    "switch_margin_gap_signed": 0.10248515754938126,
-    "peak_delay_min": 121.0,
-    "directional_align_overall": 0.5444463115442782,
-    "delta_align_vs_blockshuffle": 0.14043297435391894,
-    "delta_switch_vs_blockshuffle": 0.42613636363636354,
-    "delta_peakdelay_vs_blockshuffle": -11.0,
-    "corr_gating_regime": 0.8890241459041167,
-    "mean_abs_diff_gating_regime": 0.09984745326476023,
-    "hash_same_gating_regime": false,
-    "strategy_collapse": false,
-    "pass_core_checks_v3_v2": true,
-    "negative_control_v3_v2_guardrail_pass": true
-  },
-  "rejected_notable_candidates": [
-    {
-      "status": "rejected_candidate",
-      "name": "score_regime",
-      "window": 80,
-      "k": 2,
-      "lambda_hash_round6": "73241258368a8ccc4e0b4cde1708f5b312ba2fe1",
-      "source_csv": "synthetic_step3_v2/exports_step4/rescored_results_20260312_000817.csv",
-      "selected_rank": 1,
-      "switch_band_correct_rate": 0.805,
-      "switch_margin_gap_signed": 0.06962361931800842,
-      "peak_delay_min": 48.0,
-      "corr_gating_regime": 0.8400148199482447,
-      "mean_abs_diff_gating_regime": 0.1201029624518832,
-      "pass_core_checks_v3_v2": true,
-      "mechanism_progress": false,
-      "iteration_accept": false,
-      "iteration_accept_reason": "mechanism_progress_lt_2of3",
-      "reason": "Faster and more separable than the accepted baseline, but weaker on switch_band and switch_margin_gap."
-    },
-    {
-      "status": "rejected_candidate",
-      "name": "score_regime",
-      "window": 120,
-      "k": 8,
-      "lambda_hash_round6": "2744524df2a729d5d052b7ff28f9facb4c47261b",
-      "source_csv": "synthetic_step3_v2/exports_step4/rescored_results_20260312_005909.csv",
-      "selected_rank": 1,
-      "switch_band_correct_rate": 0.3725,
-      "switch_margin_gap_signed": -0.34310153126716614,
-      "peak_delay_min": 20.0,
-      "corr_gating_regime": 0.5690423137387092,
-      "mean_abs_diff_gating_regime": 0.2183536215326071,
-      "pass_core_checks_v3_v2": false,
-      "mechanism_progress": false,
-      "iteration_accept": false,
-      "iteration_accept_reason": "pass_core_checks_v3_v2_false;mechanism_progress_lt_2of3",
-      "reason": "Much faster and more separable, but switch_band and switch_margin_gap collapse below acceptable regime quality."
-    }
-  ],
-  "phase_c_round1_protocol": {
-    "dataset": "synthetic",
-    "training_reproducibility": {
-      "seed": 2026,
-      "num_seeds": 1,
-      "seed_policy": "Use one fixed seed for all four arms in round 1. Do not reseed per arm."
-    },
-    "data_split_protocol": {
-      "policy": "single fixed split shared by all four arms",
-      "dataset_length": 6000,
-      "t_switch": 3600,
-      "requirements": [
-        "The split must be created once and reused unchanged across baseline, gating-only, regime-only, and gating+regime.",
-        "Evaluation slices must preserve both pre and post regions.",
-        "The switch-window evaluation slice must include t_switch with enough local context for the fixed switch-window metrics.",
-        "Do not re-split after the first baseline run."
-      ],
-      "implementation_note": "Freeze one split artifact before model-side implementation. This freeze records the constraints, not yet a model-side split file."
-    },
-    "training_budget_protocol": {
-      "policy": "single fixed budget shared by all four arms",
-      "hyperparameter_tuning": "disabled in round 1",
-      "requirements": [
-        "Use the same optimizer family across all four arms.",
-        "Use the same epoch budget across all four arms.",
-        "Use the same early-stop rule across all four arms.",
-        "Use the same batch size across all four arms.",
-        "Use the same learning-rate setting across all four arms."
-      ],
-      "implementation_note": "Exact numeric optimizer defaults should be taken from the first runnable iTransformer training script and then frozen unchanged across arms."
-    },
-    "arms": [
-      "baseline",
-      "gating-only",
-      "regime-only",
-      "gating+regime"
-    ],
-    "integration": {
-      "baseline": "No lambda input.",
-      "gating-only": "Minimal integration only: loss weighting or sample/timestep weighting. Do not directly control a complex structural module in round 1.",
-      "regime-only": "Minimal integration only: extra time feature or light auxiliary input channel. Do not directly control large-scale structural switching in round 1.",
-      "gating+regime": "Run only after the single-signal arms are established under the same protocol."
-    },
-    "evaluation_metrics": [
-      "global",
-      "switch-window",
-      "pre/post",
-      "high/low-lambda-subset"
-    ],
-    "success_criteria": [
-      "gating-only beats baseline on global metrics: gating signal has model-side value.",
-      "regime-only beats baseline on switch-window metrics: regime signal has model-side value.",
-      "gating+regime is best overall or shows complementary gains without harming the switch-window metrics: the two signals are complementary."
-    ],
-    "notes": [
-      "Do not change the lambda versions during round 1.",
-      "Do not revise the evaluation metric definitions after training starts.",
-      "This freeze now fixes the round-1 seed and the protocol-level constraints for split and training budget.",
-      "Before model coding starts, generate one concrete split artifact and one concrete training-config artifact that obey these constraints."
-    ]
-  },
-  "model_side_freeze": {
-    "model_repo_root": "C:/Users/cyl/Desktop/iTransformer-phasec-clean",
-    "training_entrypoint": "run.py",
-    "experiment_class": "experiments.exp_long_term_forecasting.Exp_Long_Term_Forecast",
-    "data_provider": "data_provider.data_factory.data_provider",
-    "training_config_status": "regime_only_extra_time_feature_validated",
-    "synthetic_dataset_adapter_status": "implemented_and_validated",
-    "seed_override_status": "implemented_and_validated",
-    "baseline_validation_status": "passed",
-    "gating_noop_validation_status": "passed",
-    "baseline_metrics": {
-      "mse": 0.891771674156189,
-      "mae": 0.7162291407585144
-    },
-    "next_integration_step": "review first-round regime-only negative switch-window result before any joint gating+regime experiment",
-    "gating_only_status": "implemented_and_validated",
-    "gating_only_variant": {
-      "mode": "loss_weighting",
-      "polarity": "inverse",
-      "artifact": "lambda_gating_locked.npy",
-      "artifact_hash": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98"
-    },
-    "gating_only_metrics": {
-      "mse": 0.9256010055541992,
-      "mae": 0.7353431582450867
-    },
-    "gating_only_improves_global_metrics": false,
-    "regime_noop_validation_status": "passed",
-    "regime_protocol": {
-      "semantics": "observable_exogenous_time_context",
-      "gating_requirement": "off",
-      "modes": [
-        "none",
-        "noop",
-        "extra_time_feature"
-      ],
-      "extra_time_feature": {
-        "regime_x_shape_semantics": "[seq_len]",
-        "regime_y_shape_semantics": "[label_len + pred_len]",
-        "appended_channel_count": 1,
-        "seq_y_mark_includes_future_pred_len": true
-      }
-    },
-    "regime_only_status": "implemented_and_validated",
-    "regime_only_variant": {
-      "mode": "extra_time_feature",
-      "artifact": "lambda_regime_baseline.npy",
-      "artifact_hash": "6db132725d81c7889924901173a9399221293406",
-      "gating": "off"
-    },
-    "regime_only_metrics": {
-      "mse": 0.8901235461235046,
-      "mae": 0.7147436141967773
-    },
-    "regime_only_improves_switch_window": false
-  },
-  "phase_c_protocol_alignment": {
-    "status": "complete",
-    "dataset_smoke_check_passed": true,
-    "baseline_deterministic_repeat_passed": true,
-    "gating_noop_control_passed": true
-  },
-  "model_side_runtime": {
-    "python_executable": "C:\\Users\\cyl\\.conda\\envs\\itr\\python.exe",
-    "conda_env_name": "itr",
-    "runner": "conda run -n itr python",
-    "required_for_phase_c_training": true
-  },
-  "next_run_environment": "itr",
-  "gating_only_status": "direct_alpha_shrink_validated",
-  "gating_only_best_variant": {
-    "mode": "loss_weighting",
-    "polarity": "direct",
-    "alpha": 0.25,
-    "artifact": "lambda_gating_locked.npy",
-    "hash": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98"
-  },
-  "gating_only_comparison_gpu_itr": {
-    "baseline": {
-      "mse": 0.8902064561843872,
-      "mae": 0.7155085802078247
-    },
-    "noop": {
-      "mse": 0.8902064561843872,
-      "mae": 0.7155085802078247
-    },
-    "inverse_alpha1": {
-      "mse": 0.9238790273666382,
-      "mae": 0.7343993782997131
-    },
-    "direct_alpha1": {
-      "mse": 0.8971740007400513,
-      "mae": 0.7207692861557007
-    },
-    "direct_alpha05": {
-      "mse": 0.8877124786376953,
-      "mae": 0.7152264714241028
-    },
-    "direct_alpha025": {
-      "mse": 0.8867132663726807,
-      "mae": 0.7141200304031372
-    }
-  },
-  "gating_only_improves_global_metrics": true,
-  "next_integration_step": "decide whether to redesign regime input after minimal gating+regime failed to recover switch-window complementarity",
-  "gating_only_local_metrics": {
-    "evaluation_unit": "prediction_elements_without_timestamp_dedup",
-    "artifact": "slice_metrics/phasec_round1_local_slice_metric_summary.json",
-    "summary": {
-      "global_delta": {
-        "mae": -0.0013885498046875,
-        "mse": -0.003493189811706543
-      },
-      "pre_eval_delta": {
-        "mae": -0.003177821636199951,
-        "mse": -0.002656280994415283
-      },
-      "post_eval_delta": {
-        "mae": 0.000400543212890625,
-        "mse": -0.0043305158615112305
-      },
-      "switch_window_delta": {
-        "mae": 0.0016362667083740234,
-        "mse": 0.0036661624908447266
-      },
-      "switch_pre_delta": {
-        "mae": 0.001491636037826538,
-        "mse": 0.0026116669178009033
-      },
-      "switch_post_delta": {
-        "mae": 0.0017812848091125488,
-        "mse": 0.0047206878662109375
-      }
-    },
-    "takeaway": "direct alpha=0.25 remains identical to baseline on noop control, improves global metrics and pre_eval slightly, improves post_eval mse slightly with nearly flat post_eval mae, but is worse than baseline on switch_window, switch_pre, and switch_post."
-  },
-  "regime_only_status": "extra_time_feature_validated",
-  "regime_only_best_variant": {
-    "mode": "extra_time_feature",
-    "artifact": "lambda_regime_baseline.npy",
-    "hash": "6db132725d81c7889924901173a9399221293406",
-    "gating": "off"
-  },
-  "regime_only_comparison_gpu_itr": {
-    "baseline": {
-      "mse": 0.8902064561843872,
-      "mae": 0.7155085802078247
-    },
-    "noop": {
-      "mse": 0.8902064561843872,
-      "mae": 0.7155085802078247
-    },
-    "extra_time_feature": {
-      "mse": 0.8901235461235046,
-      "mae": 0.7147436141967773
-    }
-  },
-  "regime_only_improves_switch_window": false,
-  "regime_only_local_metrics": {
-    "evaluation_unit": "prediction_elements_without_timestamp_dedup",
-    "artifact": "slice_metrics/phasec_round1_local_slice_metric_summary.json",
-    "summary": {
-      "global_delta": {
-        "mae": -0.0007649660110473633,
-        "mse": -8.291006088256836e-05
-      },
-      "pre_eval_delta": {
-        "mae": 0.0010861754417419434,
-        "mse": 0.0023230314254760742
-      },
-      "post_eval_delta": {
-        "mae": -0.0026158690452575684,
-        "mse": -0.002488851547241211
-      },
-      "switch_window_delta": {
-        "mae": 0.0005524158477783203,
-        "mse": 0.002308487892150879
-      },
-      "switch_pre_delta": {
-        "mae": 6.064772605895996e-05,
-        "mse": 0.00043901801109313965
-      },
-      "switch_post_delta": {
-        "mae": 0.00104445219039917,
-        "mse": 0.00417780876159668
-      }
-    },
-    "takeaway": "regime_only extra_time_feature slightly improves global/post_eval but is worse than baseline on pre_eval and all switch slices."
-  },
-  "notes": [
-    "Regime lambda artifact contained 49 NaNs at indices 0..48; the Phase C adapter now sanitizes them deterministically by linear interpolation with edge-value extrapolation.",
-    "First-round regime_only extra_time_feature slightly improved global/post_eval but degraded pre_eval and all switch-window slices.",
-    "Minimal gating+regime in itr+GPU preserved and slightly improved global metrics versus gating-only, but did not improve switch_window, switch_pre, or switch_post versus baseline or gating-only."
-  ],
-  "gating_regime_status": "implemented_and_validated",
-  "gating_regime_variant": {
-    "gating": {
-      "mode": "loss_weighting",
-      "polarity": "direct",
-      "alpha": 0.25,
-      "artifact": "lambda_gating_locked.npy",
-      "artifact_hash": "f4bc9d33f862bbd93db5af7ae20b4edb995cae98"
-    },
-    "regime": {
-      "mode": "extra_time_feature",
-      "artifact": "lambda_regime_baseline.npy",
-      "artifact_hash": "6db132725d81c7889924901173a9399221293406"
-    }
-  },
-  "gating_regime_metrics": {
-    "mse": 0.8864040970802307,
-    "mae": 0.7132958173751831
-  },
-  "gating_regime_improves_switch_window": false,
-  "gating_regime_local_metrics": "slice_metrics/phasec_round1_local_slice_metric_summary.json",
-  "current_model_side_status": {
-    "baseline_gpu_itr": {
-      "mse": 0.8902064561843872,
-      "mae": 0.7155085802078247
-    },
-    "gating_only_best": {
-      "mode": "loss_weighting",
-      "polarity": "direct",
-      "alpha": 0.25,
-      "mse": 0.8867132663726807,
-      "mae": 0.7141200304031372,
-      "takeaway": "small reproducible global gain; switch-window trade-off remains negative"
-    },
-    "regime_only_extra_time_feature": {
-      "mse": 0.8901235461235046,
-      "mae": 0.7147436141967773,
-      "takeaway": "too weak to recover switch-window"
-    },
-    "regime_only_light_aux_input": {
-      "mse": 0.9015757441520691,
-      "mae": 0.7267856001853943,
-      "pre_eval": {
-        "mse": 0.9445242881774902,
-        "mae": 0.6909926533699036
-      },
-      "post_eval": {
-        "mse": 0.8586272597312927,
-        "mae": 0.762578547000885
-      },
-      "switch_window": {
-        "mse": 0.6770349740982056,
-        "mae": 0.5970309376716614
-      },
-      "switch_pre": {
-        "mse": 0.34920498728752136,
-        "mae": 0.4297652542591095
-      },
-      "switch_post": {
-        "mse": 1.0048649311065674,
-        "mae": 0.7642967700958252
-      },
-      "takeaway": "first regime path that improves switch-window, but with a clear global/post trade-off"
-    },
-    "gating_plus_regime_minimal": {
-      "mse": 0.8864040970802307,
-      "mae": 0.7132958173751831,
-      "takeaway": "slight global gain; still does not recover switch-window"
-    },
-    "gating_plus_regime_light_aux_input": {
-      "mse": 0.9047273993492126,
-      "mae": 0.7288652658462524,
-      "pre_eval": {
-        "mse": 0.94024658203125,
-        "mae": 0.6875647306442261
-      },
-      "post_eval": {
-        "mse": 0.8692085146903992,
-        "mae": 0.7701656818389893
-      },
-      "switch_window": {
-        "mse": 0.6802034974098206,
-        "mae": 0.5984366536140442
-      },
-      "switch_pre": {
-        "mse": 0.35113760828971863,
-        "mae": 0.43087121844291687
-      },
-      "switch_post": {
-        "mse": 1.0092693567276,
-        "mae": 0.7660021185874939
-      },
-      "takeaway": "first joint path that improves switch-window slices versus baseline, but with a stronger global/post trade-off than gating-only or regime-only."
-    }
-  },
-  "next_step_recommendation": "Freeze current Phase C results. If continuing, prefer redesigning the joint route so it preserves switch-window gains while reducing the stronger global/post trade-off seen in gating+regime_light_aux_input."
+﻿{
+    "frozen_timestamp":  "2026-03-18T20:54:14.5719628+08:00",
+    "purpose":  "Frozen Phase C round-1 signal inputs, protocol, and validated model-side experiment states.",
+    "benchmark_version":  "phaseA_v0.1_synth",
+    "dataset":  "synthetic",
+    "canonical_artifacts_root":  "C:/Users/cyl/Desktop/phaseC_artifacts",
+    "artifacts_manifest":  {
+                               "readme":  "README.md",
+                               "input_spec":  "phaseC_input_spec.md",
+                               "split_artifact":  "phaseC_round1_split.json",
+                               "training_config":  "phaseC_round1_train_config.json",
+                               "gating_lambda_npy":  "lambda_gating_locked.npy",
+                               "gating_lambda_npz":  "lambda_gating_locked.npz",
+                               "regime_lambda_npy":  "lambda_regime_baseline.npy",
+                               "regime_lambda_npz":  "lambda_regime_baseline.npz",
+                               "local_slice_metric_summary":  "slice_metrics/phasec_round1_local_slice_metric_summary.json",
+                               "regime_noop_posthoc":  "slice_metrics/regime_noop_posthoc.json",
+                               "regime_extra_time_feature_posthoc":  "slice_metrics/regime_extra_time_feature_posthoc.json",
+                               "regime_noop_switch":  "slice_metrics/regime_noop_switch/phasec_switch_slice_metrics.json",
+                               "regime_extra_time_feature_switch":  "slice_metrics/regime_extra_time_feature_switch/phasec_switch_slice_metrics.json",
+                               "gating_regime_minimal_posthoc":  "slice_metrics/gating_regime_minimal_posthoc.json",
+                               "gating_regime_minimal_switch":  "slice_metrics/gating_regime_minimal_switch/phasec_switch_slice_metrics.json",
+                               "phasec_summary":  "phaseC_summary.md"
+                           },
+    "source_files":  [
+                         "synthetic_step3_v2/exports_step5pp/phaseA_summary.md",
+                         "synthetic_step3_v2/exports_step5pp/phaseA_rulebook.md",
+                         "synthetic_step3_v2/exports_step5pp/phaseB_locked_variants.json",
+                         "synthetic_step3_v2/exports_step5pp/phaseB_baseline_regime.json",
+                         "synthetic_step3_v2/exports_step5pp/compare/compare_regime_iteration.csv",
+                         "synthetic_step3_v2/exports_step5pp/phaseC_round1_split.json",
+                         "synthetic_step3_v2/exports_step5pp/phaseC_round1_train_config.json",
+                         "synthetic_step3_v2/exports_step5pp/phaseC_staging/lambda_regime_baseline.json",
+                         "C:/Users/cyl/Desktop/iTransformer-phasec-clean/run.py",
+                         "C:/Users/cyl/Desktop/iTransformer-phasec-clean/experiments/exp_long_term_forecasting.py",
+                         "C:/Users/cyl/Desktop/iTransformer-phasec-clean/data_provider/data_factory.py",
+                         "C:/Users/cyl/Desktop/iTransformer-phasec-clean/data_provider/data_loader.py",
+                         "C:/Users/cyl/Desktop/iTransformer-phasec-clean/tools/phasec_posthoc_test_slices.py",
+                         "C:/Users/cyl/Desktop/iTransformer-phasec-clean/tools/phasec_switch_slice_eval.py"
+                     ],
+    "split_artifact":  "phaseC_round1_split.json",
+    "training_config_artifact":  "phaseC_round1_train_config.json",
+    "input_spec_artifact":  "phaseC_input_spec.md",
+    "gating_lambda_artifact":  {
+                                   "npy":  "lambda_gating_locked.npy",
+                                   "npz":  "lambda_gating_locked.npz"
+                               },
+    "regime_lambda_artifact":  {
+                                   "npy":  "lambda_regime_baseline.npy",
+                                   "npz":  "lambda_regime_baseline.npz"
+                               },
+    "locked_gating_variant":  {
+                                  "name":  "score_gating",
+                                  "window":  40,
+                                  "k":  2,
+                                  "lambda_hash_round6":  "f4bc9d33f862bbd93db5af7ae20b4edb995cae98",
+                                  "source_csv":  "synthetic_step3_v2/exports_step4/rescored_results_20260311_162910.csv",
+                                  "selected_rank":  1,
+                                  "lock_reason":  "phaseB_locked_from_current_variant",
+                                  "locked_at":  "2026-03-11T16:56:45"
+                              },
+    "accepted_regime_baseline":  {
+                                     "name":  "score_regime",
+                                     "window":  50,
+                                     "k":  2,
+                                     "lambda_hash_round6":  "6db132725d81c7889924901173a9399221293406",
+                                     "source_csv":  "synthetic_step3_v2/exports_step4/rescored_results_20260306_142434.csv",
+                                     "selected_rank":  2,
+                                     "artifact_source":  {
+                                                             "type":  "reconstructed_from_historical_code",
+                                                             "source_commit":  "6bcfe93",
+                                                             "source_file":  "step5pp_utils.py",
+                                                             "local_staging_meta":  "synthetic_step3_v2/exports_step5pp/phaseC_staging/lambda_regime_baseline.json"
+                                                         },
+                                     "switch_band_correct_rate":  0.83,
+                                     "switch_margin_gap_signed":  0.10248515754938126,
+                                     "peak_delay_min":  121.0,
+                                     "directional_align_overall":  0.5444463115442782,
+                                     "delta_align_vs_blockshuffle":  0.14043297435391894,
+                                     "delta_switch_vs_blockshuffle":  0.42613636363636354,
+                                     "delta_peakdelay_vs_blockshuffle":  -11.0,
+                                     "corr_gating_regime":  0.8890241459041167,
+                                     "mean_abs_diff_gating_regime":  0.09984745326476023,
+                                     "hash_same_gating_regime":  false,
+                                     "strategy_collapse":  false,
+                                     "pass_core_checks_v3_v2":  true,
+                                     "negative_control_v3_v2_guardrail_pass":  true
+                                 },
+    "rejected_notable_candidates":  [
+                                        {
+                                            "status":  "rejected_candidate",
+                                            "name":  "score_regime",
+                                            "window":  80,
+                                            "k":  2,
+                                            "lambda_hash_round6":  "73241258368a8ccc4e0b4cde1708f5b312ba2fe1",
+                                            "source_csv":  "synthetic_step3_v2/exports_step4/rescored_results_20260312_000817.csv",
+                                            "selected_rank":  1,
+                                            "switch_band_correct_rate":  0.805,
+                                            "switch_margin_gap_signed":  0.06962361931800842,
+                                            "peak_delay_min":  48.0,
+                                            "corr_gating_regime":  0.8400148199482447,
+                                            "mean_abs_diff_gating_regime":  0.1201029624518832,
+                                            "pass_core_checks_v3_v2":  true,
+                                            "mechanism_progress":  false,
+                                            "iteration_accept":  false,
+                                            "iteration_accept_reason":  "mechanism_progress_lt_2of3",
+                                            "reason":  "Faster and more separable than the accepted baseline, but weaker on switch_band and switch_margin_gap."
+                                        },
+                                        {
+                                            "status":  "rejected_candidate",
+                                            "name":  "score_regime",
+                                            "window":  120,
+                                            "k":  8,
+                                            "lambda_hash_round6":  "2744524df2a729d5d052b7ff28f9facb4c47261b",
+                                            "source_csv":  "synthetic_step3_v2/exports_step4/rescored_results_20260312_005909.csv",
+                                            "selected_rank":  1,
+                                            "switch_band_correct_rate":  0.3725,
+                                            "switch_margin_gap_signed":  -0.34310153126716614,
+                                            "peak_delay_min":  20.0,
+                                            "corr_gating_regime":  0.5690423137387092,
+                                            "mean_abs_diff_gating_regime":  0.2183536215326071,
+                                            "pass_core_checks_v3_v2":  false,
+                                            "mechanism_progress":  false,
+                                            "iteration_accept":  false,
+                                            "iteration_accept_reason":  "pass_core_checks_v3_v2_false;mechanism_progress_lt_2of3",
+                                            "reason":  "Much faster and more separable, but switch_band and switch_margin_gap collapse below acceptable regime quality."
+                                        }
+                                    ],
+    "phase_c_round1_protocol":  {
+                                    "dataset":  "synthetic",
+                                    "training_reproducibility":  {
+                                                                     "seed":  2026,
+                                                                     "num_seeds":  1,
+                                                                     "seed_policy":  "Use one fixed seed for all four arms in round 1. Do not reseed per arm."
+                                                                 },
+                                    "data_split_protocol":  {
+                                                                "policy":  "single fixed split shared by all four arms",
+                                                                "dataset_length":  6000,
+                                                                "t_switch":  3600,
+                                                                "requirements":  [
+                                                                                     "The split must be created once and reused unchanged across baseline, gating-only, regime-only, and gating+regime.",
+                                                                                     "Evaluation slices must preserve both pre and post regions.",
+                                                                                     "The switch-window evaluation slice must include t_switch with enough local context for the fixed switch-window metrics.",
+                                                                                     "Do not re-split after the first baseline run."
+                                                                                 ],
+                                                                "implementation_note":  "Freeze one split artifact before model-side implementation. This freeze records the constraints, not yet a model-side split file."
+                                                            },
+                                    "training_budget_protocol":  {
+                                                                     "policy":  "single fixed budget shared by all four arms",
+                                                                     "hyperparameter_tuning":  "disabled in round 1",
+                                                                     "requirements":  [
+                                                                                          "Use the same optimizer family across all four arms.",
+                                                                                          "Use the same epoch budget across all four arms.",
+                                                                                          "Use the same early-stop rule across all four arms.",
+                                                                                          "Use the same batch size across all four arms.",
+                                                                                          "Use the same learning-rate setting across all four arms."
+                                                                                      ],
+                                                                     "implementation_note":  "Exact numeric optimizer defaults should be taken from the first runnable iTransformer training script and then frozen unchanged across arms."
+                                                                 },
+                                    "arms":  [
+                                                 "baseline",
+                                                 "gating-only",
+                                                 "regime-only",
+                                                 "gating+regime"
+                                             ],
+                                    "integration":  {
+                                                        "baseline":  "No lambda input.",
+                                                        "gating-only":  "Minimal integration only: loss weighting or sample/timestep weighting. Do not directly control a complex structural module in round 1.",
+                                                        "regime-only":  "Minimal integration only: extra time feature or light auxiliary input channel. Do not directly control large-scale structural switching in round 1.",
+                                                        "gating+regime":  "Run only after the single-signal arms are established under the same protocol."
+                                                    },
+                                    "evaluation_metrics":  [
+                                                               "global",
+                                                               "switch-window",
+                                                               "pre/post",
+                                                               "high/low-lambda-subset"
+                                                           ],
+                                    "success_criteria":  [
+                                                             "gating-only beats baseline on global metrics: gating signal has model-side value.",
+                                                             "regime-only beats baseline on switch-window metrics: regime signal has model-side value.",
+                                                             "gating+regime is best overall or shows complementary gains without harming the switch-window metrics: the two signals are complementary."
+                                                         ],
+                                    "notes":  [
+                                                  "Do not change the lambda versions during round 1.",
+                                                  "Do not revise the evaluation metric definitions after training starts.",
+                                                  "This freeze now fixes the round-1 seed and the protocol-level constraints for split and training budget.",
+                                                  "Before model coding starts, generate one concrete split artifact and one concrete training-config artifact that obey these constraints."
+                                              ]
+                                },
+    "model_side_freeze":  {
+                              "model_repo_root":  "C:/Users/cyl/Desktop/iTransformer-phasec-clean",
+                              "training_entrypoint":  "run.py",
+                              "experiment_class":  "experiments.exp_long_term_forecasting.Exp_Long_Term_Forecast",
+                              "data_provider":  "data_provider.data_factory.data_provider",
+                              "training_config_status":  "regime_only_extra_time_feature_validated",
+                              "synthetic_dataset_adapter_status":  "implemented_and_validated",
+                              "seed_override_status":  "implemented_and_validated",
+                              "baseline_validation_status":  "passed",
+                              "gating_noop_validation_status":  "passed",
+                              "baseline_metrics":  {
+                                                       "mse":  0.891771674156189,
+                                                       "mae":  0.7162291407585144
+                                                   },
+                              "next_integration_step":  "review first-round regime-only negative switch-window result before any joint gating+regime experiment",
+                              "gating_only_status":  "implemented_and_validated",
+                              "gating_only_variant":  {
+                                                          "mode":  "loss_weighting",
+                                                          "polarity":  "inverse",
+                                                          "artifact":  "lambda_gating_locked.npy",
+                                                          "artifact_hash":  "f4bc9d33f862bbd93db5af7ae20b4edb995cae98"
+                                                      },
+                              "gating_only_metrics":  {
+                                                          "mse":  0.9256010055541992,
+                                                          "mae":  0.7353431582450867
+                                                      },
+                              "gating_only_improves_global_metrics":  false,
+                              "regime_noop_validation_status":  "passed",
+                              "regime_protocol":  {
+                                                      "semantics":  "observable_exogenous_time_context",
+                                                      "gating_requirement":  "off",
+                                                      "modes":  [
+                                                                    "none",
+                                                                    "noop",
+                                                                    "extra_time_feature"
+                                                                ],
+                                                      "extra_time_feature":  {
+                                                                                 "regime_x_shape_semantics":  "[seq_len]",
+                                                                                 "regime_y_shape_semantics":  "[label_len + pred_len]",
+                                                                                 "appended_channel_count":  1,
+                                                                                 "seq_y_mark_includes_future_pred_len":  true
+                                                                             }
+                                                  },
+                              "regime_only_status":  "implemented_and_validated",
+                              "regime_only_variant":  {
+                                                          "mode":  "extra_time_feature",
+                                                          "artifact":  "lambda_regime_baseline.npy",
+                                                          "artifact_hash":  "6db132725d81c7889924901173a9399221293406",
+                                                          "gating":  "off"
+                                                      },
+                              "regime_only_metrics":  {
+                                                          "mse":  0.8901235461235046,
+                                                          "mae":  0.7147436141967773
+                                                      },
+                              "regime_only_improves_switch_window":  false
+                          },
+    "phase_c_protocol_alignment":  {
+                                       "status":  "complete",
+                                       "dataset_smoke_check_passed":  true,
+                                       "baseline_deterministic_repeat_passed":  true,
+                                       "gating_noop_control_passed":  true
+                                   },
+    "model_side_runtime":  {
+                               "python_executable":  "C:\\Users\\cyl\\.conda\\envs\\itr\\python.exe",
+                               "conda_env_name":  "itr",
+                               "runner":  "conda run -n itr python",
+                               "required_for_phase_c_training":  true
+                           },
+    "next_run_environment":  "itr",
+    "gating_only_status":  "direct_alpha_shrink_validated",
+    "gating_only_best_variant":  {
+                                     "mode":  "loss_weighting",
+                                     "polarity":  "direct",
+                                     "alpha":  0.25,
+                                     "artifact":  "lambda_gating_locked.npy",
+                                     "hash":  "f4bc9d33f862bbd93db5af7ae20b4edb995cae98"
+                                 },
+    "gating_only_comparison_gpu_itr":  {
+                                           "baseline":  {
+                                                            "mse":  0.8902064561843872,
+                                                            "mae":  0.7155085802078247
+                                                        },
+                                           "noop":  {
+                                                        "mse":  0.8902064561843872,
+                                                        "mae":  0.7155085802078247
+                                                    },
+                                           "inverse_alpha1":  {
+                                                                  "mse":  0.9238790273666382,
+                                                                  "mae":  0.7343993782997131
+                                                              },
+                                           "direct_alpha1":  {
+                                                                 "mse":  0.8971740007400513,
+                                                                 "mae":  0.7207692861557007
+                                                             },
+                                           "direct_alpha05":  {
+                                                                  "mse":  0.8877124786376953,
+                                                                  "mae":  0.7152264714241028
+                                                              },
+                                           "direct_alpha025":  {
+                                                                   "mse":  0.8867132663726807,
+                                                                   "mae":  0.7141200304031372
+                                                               }
+                                       },
+    "gating_only_improves_global_metrics":  true,
+    "next_integration_step":  "decide whether to redesign regime input after minimal gating+regime failed to recover switch-window complementarity",
+    "gating_only_local_metrics":  {
+                                      "evaluation_unit":  "prediction_elements_without_timestamp_dedup",
+                                      "artifact":  "slice_metrics/phasec_round1_local_slice_metric_summary.json",
+                                      "summary":  {
+                                                      "global_delta":  {
+                                                                           "mae":  -0.0013885498046875,
+                                                                           "mse":  -0.003493189811706543
+                                                                       },
+                                                      "pre_eval_delta":  {
+                                                                             "mae":  -0.003177821636199951,
+                                                                             "mse":  -0.002656280994415283
+                                                                         },
+                                                      "post_eval_delta":  {
+                                                                              "mae":  0.000400543212890625,
+                                                                              "mse":  -0.0043305158615112305
+                                                                          },
+                                                      "switch_window_delta":  {
+                                                                                  "mae":  0.0016362667083740234,
+                                                                                  "mse":  0.0036661624908447266
+                                                                              },
+                                                      "switch_pre_delta":  {
+                                                                               "mae":  0.001491636037826538,
+                                                                               "mse":  0.0026116669178009033
+                                                                           },
+                                                      "switch_post_delta":  {
+                                                                                "mae":  0.0017812848091125488,
+                                                                                "mse":  0.0047206878662109375
+                                                                            }
+                                                  },
+                                      "takeaway":  "direct alpha=0.25 remains identical to baseline on noop control, improves global metrics and pre_eval slightly, improves post_eval mse slightly with nearly flat post_eval mae, but is worse than baseline on switch_window, switch_pre, and switch_post."
+                                  },
+    "regime_only_status":  "extra_time_feature_validated",
+    "regime_only_best_variant":  {
+                                     "mode":  "extra_time_feature",
+                                     "artifact":  "lambda_regime_baseline.npy",
+                                     "hash":  "6db132725d81c7889924901173a9399221293406",
+                                     "gating":  "off"
+                                 },
+    "regime_only_comparison_gpu_itr":  {
+                                           "baseline":  {
+                                                            "mse":  0.8902064561843872,
+                                                            "mae":  0.7155085802078247
+                                                        },
+                                           "noop":  {
+                                                        "mse":  0.8902064561843872,
+                                                        "mae":  0.7155085802078247
+                                                    },
+                                           "extra_time_feature":  {
+                                                                      "mse":  0.8901235461235046,
+                                                                      "mae":  0.7147436141967773
+                                                                  }
+                                       },
+    "regime_only_improves_switch_window":  false,
+    "regime_only_local_metrics":  {
+                                      "evaluation_unit":  "prediction_elements_without_timestamp_dedup",
+                                      "artifact":  "slice_metrics/phasec_round1_local_slice_metric_summary.json",
+                                      "summary":  {
+                                                      "global_delta":  {
+                                                                           "mae":  -0.0007649660110473633,
+                                                                           "mse":  -8.2910060882568359E-05
+                                                                       },
+                                                      "pre_eval_delta":  {
+                                                                             "mae":  0.0010861754417419434,
+                                                                             "mse":  0.0023230314254760742
+                                                                         },
+                                                      "post_eval_delta":  {
+                                                                              "mae":  -0.0026158690452575684,
+                                                                              "mse":  -0.002488851547241211
+                                                                          },
+                                                      "switch_window_delta":  {
+                                                                                  "mae":  0.0005524158477783203,
+                                                                                  "mse":  0.002308487892150879
+                                                                              },
+                                                      "switch_pre_delta":  {
+                                                                               "mae":  6.0647726058959961E-05,
+                                                                               "mse":  0.00043901801109313965
+                                                                           },
+                                                      "switch_post_delta":  {
+                                                                                "mae":  0.00104445219039917,
+                                                                                "mse":  0.00417780876159668
+                                                                            }
+                                                  },
+                                      "takeaway":  "regime_only extra_time_feature slightly improves global/post_eval but is worse than baseline on pre_eval and all switch slices."
+                                  },
+    "notes":  [
+                  "Regime lambda artifact contained 49 NaNs at indices 0..48; the Phase C adapter now sanitizes them deterministically by linear interpolation with edge-value extrapolation.",
+                  "First-round regime_only extra_time_feature slightly improved global/post_eval but degraded pre_eval and all switch-window slices.",
+                  "Minimal gating+regime in itr+GPU preserved and slightly improved global metrics versus gating-only, but did not improve switch_window, switch_pre, or switch_post versus baseline or gating-only."
+              ],
+    "gating_regime_status":  "implemented_and_validated",
+    "gating_regime_variant":  {
+                                  "gating":  {
+                                                 "mode":  "loss_weighting",
+                                                 "polarity":  "direct",
+                                                 "alpha":  0.25,
+                                                 "artifact":  "lambda_gating_locked.npy",
+                                                 "artifact_hash":  "f4bc9d33f862bbd93db5af7ae20b4edb995cae98"
+                                             },
+                                  "regime":  {
+                                                 "mode":  "extra_time_feature",
+                                                 "artifact":  "lambda_regime_baseline.npy",
+                                                 "artifact_hash":  "6db132725d81c7889924901173a9399221293406"
+                                             }
+                              },
+    "gating_regime_metrics":  {
+                                  "mse":  0.8864040970802307,
+                                  "mae":  0.7132958173751831
+                              },
+    "gating_regime_improves_switch_window":  false,
+    "gating_regime_local_metrics":  "slice_metrics/phasec_round1_local_slice_metric_summary.json",
+    "current_model_side_status":  {
+                                      "baseline_gpu_itr":  {
+                                                               "mse":  0.8902064561843872,
+                                                               "mae":  0.7155085802078247
+                                                           },
+                                      "gating_only_best":  {
+                                                               "mode":  "loss_weighting",
+                                                               "polarity":  "direct",
+                                                               "alpha":  0.25,
+                                                               "mse":  0.8867132663726807,
+                                                               "mae":  0.7141200304031372,
+                                                               "takeaway":  "small reproducible global gain; switch-window trade-off remains negative"
+                                                           },
+                                      "regime_only_extra_time_feature":  {
+                                                                             "mse":  0.8901235461235046,
+                                                                             "mae":  0.7147436141967773,
+                                                                             "takeaway":  "too weak to recover switch-window"
+                                                                         },
+                                      "regime_only_light_aux_input":  {
+                                                                          "mse":  0.9015757441520691,
+                                                                          "mae":  0.7267856001853943,
+                                                                          "pre_eval":  {
+                                                                                           "mse":  0.9445242881774902,
+                                                                                           "mae":  0.6909926533699036
+                                                                                       },
+                                                                          "post_eval":  {
+                                                                                            "mse":  0.8586272597312927,
+                                                                                            "mae":  0.762578547000885
+                                                                                        },
+                                                                          "switch_window":  {
+                                                                                                "mse":  0.6770349740982056,
+                                                                                                "mae":  0.5970309376716614
+                                                                                            },
+                                                                          "switch_pre":  {
+                                                                                             "mse":  0.34920498728752136,
+                                                                                             "mae":  0.4297652542591095
+                                                                                         },
+                                                                          "switch_post":  {
+                                                                                              "mse":  1.0048649311065674,
+                                                                                              "mae":  0.7642967700958252
+                                                                                          },
+                                                                          "takeaway":  "first regime path that improves switch-window, but with a clear global/post trade-off"
+                                                                      },
+                                      "gating_plus_regime_minimal":  {
+                                                                         "mse":  0.8864040970802307,
+                                                                         "mae":  0.7132958173751831,
+                                                                         "takeaway":  "slight global gain; still does not recover switch-window"
+                                                                     },
+                                      "gating_plus_regime_light_aux_input":  {
+                                                                                 "mse":  0.9047273993492126,
+                                                                                 "mae":  0.7288652658462524,
+                                                                                 "pre_eval":  {
+                                                                                                  "mse":  0.94024658203125,
+                                                                                                  "mae":  0.6875647306442261
+                                                                                              },
+                                                                                 "post_eval":  {
+                                                                                                   "mse":  0.8692085146903992,
+                                                                                                   "mae":  0.7701656818389893
+                                                                                               },
+                                                                                 "switch_window":  {
+                                                                                                       "mse":  0.6802034974098206,
+                                                                                                       "mae":  0.5984366536140442
+                                                                                                   },
+                                                                                 "switch_pre":  {
+                                                                                                    "mse":  0.35113760828971863,
+                                                                                                    "mae":  0.43087121844291687
+                                                                                                },
+                                                                                 "switch_post":  {
+                                                                                                     "mse":  1.0092693567276,
+                                                                                                     "mae":  0.7660021185874939
+                                                                                                 },
+                                                                                 "takeaway":  "first joint path that improves switch-window slices versus baseline, but with a stronger global/post trade-off than gating-only or regime-only."
+                                                                             }
+                                  },
+    "next_step_recommendation":  "Freeze current Phase C results. If continuing, prefer redesigning the joint route so it preserves switch-window gains while reducing the stronger global/post trade-off seen in gating+regime_light_aux_input.",
+    "phase_c_closeout_status":  "closed",
+    "phase_c_closeout_summary":  "phaseC_summary.md"
 }
