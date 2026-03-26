@@ -185,7 +185,7 @@ These criteria are meant to decide whether the signal-side work from Phase A/Pha
 - `gating-only` gives a small, reproducible global gain, but harms `switch-window`.
 - `regime-only extra_time_feature` is too weak to recover `switch-window`.
 - `regime-only light_aux_input` is the first regime path that improves `switch_window`, `switch_pre`, and `switch_post` versus baseline, but it degrades global and `post_eval` metrics.
-- Minimal `gating + regime` keeps a small global gain but still does not recover `switch-window`.
+- `gating + regime_light_aux_input` is the first joint path that improves `switch_window`, `switch_pre`, and `switch_post` versus baseline and gating-only, but it degrades global and `post_eval` more strongly than `gating-only`.
 
 The current Phase C question is no longer whether these paths run. It is whether a stronger regime-side path can recover `switch-window` without giving up too much global quality.
 
@@ -210,3 +210,17 @@ Validated on the same `itr + GPU`, `seed=2026`, and frozen split protocol.
   - `switch_post`: better than baseline
 
 Interpretation: `extra_time_feature` was too weak. `light_aux_input` restores switch-window signal, but introduces a clear global/post trade-off.
+
+## Joint Light Aux Input Summary
+
+Validated on the same `itr + GPU`, `seed=2026`, and frozen split protocol.
+
+- `gating + regime_light_aux_input`:
+  - global: `mse=0.9047273993492126`, `mae=0.7288652658462524`
+  - `pre_eval`: better than baseline
+  - `post_eval`: worse than baseline
+  - `switch_window`: better than baseline and gating-only
+  - `switch_pre`: better than baseline and gating-only
+  - `switch_post`: better than baseline and gating-only
+
+Interpretation: adding `regime_light_aux_input` to the validated `gating-only` route restores switch-window performance, but introduces a substantially larger global/post trade-off.

@@ -57,7 +57,7 @@
       "mse": 0.891771674156189,
       "mae": 0.7162291407585144
     },
-    "next_step": "Freeze current results. If continuing, prefer redesigning regime or a joint design aimed at switch-window recovery rather than more tuning of extra_time_feature.",
+    "next_step": "Freeze current Phase C results. If continuing, redesign the joint route to preserve switch-window gains while reducing the stronger global/post trade-off.",
     "gating_only_loss_weighting_inverse": {
       "status": "passed",
       "mode": "loss_weighting",
@@ -240,7 +240,7 @@
       "beats_gating_only_on_switch_window": false
     },
     "joint_local_slice_metrics": "slice_metrics/phasec_round1_local_slice_metric_summary.json",
-    "joint_interpretation": "Minimal joint gating+regime preserves the global gains of gating-only and improves post_eval further, but does not recover switch_window complementarity.",
+    "joint_interpretation": "With regime light_aux_input, the joint path recovers switch_window, switch_pre, and switch_post above baseline and gating-only, but the global and post_eval trade-off is substantially worse than gating-only.",
     "regime_only_light_aux_input_gpu_itr": {
       "status": "validated",
       "runtime": "itr_gpu",
@@ -272,6 +272,43 @@
         }
       },
       "takeaway": "improves switch-window metrics versus baseline, but degrades global/post metrics"
+    },
+    "gating_regime_light_aux_input_gpu_itr": {
+      "status": "validated",
+      "runtime": "itr_gpu",
+      "gating_mode": "loss_weighting",
+      "gating_polarity": "direct",
+      "gating_alpha": 0.25,
+      "regime_mode": "light_aux_input",
+      "metrics": {
+        "global": {
+          "mse": 0.9047273993492126,
+          "mae": 0.7288652658462524
+        },
+        "pre_eval": {
+          "mse": 0.94024658203125,
+          "mae": 0.6875647306442261
+        },
+        "post_eval": {
+          "mse": 0.8692085146903992,
+          "mae": 0.7701656818389893
+        },
+        "switch_window": {
+          "mse": 0.6802034974098206,
+          "mae": 0.5984366536140442
+        },
+        "switch_pre": {
+          "mse": 0.35113760828971863,
+          "mae": 0.43087121844291687
+        },
+        "switch_post": {
+          "mse": 1.0092693567276,
+          "mae": 0.7660021185874939
+        }
+      },
+      "beats_baseline_on_switch_window": true,
+      "beats_gating_only_on_switch_window": true,
+      "takeaway": "joint light_aux_input restores switch-window slices above baseline and gating-only, but with a larger global/post trade-off."
     }
   },
   "ownership": {

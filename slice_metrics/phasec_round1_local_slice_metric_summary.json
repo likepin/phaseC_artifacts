@@ -565,6 +565,33 @@
           "rmse": 1.002429485321045
         }
       }
+    },
+    "gating_regime_light_aux_input_gpu": {
+      "global_metrics": {
+        "mse": 0.9047273993492126,
+        "mae": 0.7288652658462524
+      },
+      "pre_eval": {
+        "mse": 0.94024658203125,
+        "mae": 0.6875647306442261
+      },
+      "post_eval": {
+        "mse": 0.8692085146903992,
+        "mae": 0.7701656818389893
+      },
+      "switch_window": {
+        "mse": 0.6802034974098206,
+        "mae": 0.5984366536140442
+      },
+      "switch_pre": {
+        "mse": 0.35113760828971863,
+        "mae": 0.43087121844291687
+      },
+      "switch_post": {
+        "mse": 1.0092693567276,
+        "mae": 0.7660021185874939
+      },
+      "takeaway": "first joint path that improves switch-window slices versus baseline, but with a stronger global/post trade-off"
     }
   },
   "comparisons": {
@@ -723,6 +750,33 @@
         "mae": -0.003599703311920166,
         "mse": -0.007414102554321289
       }
+    },
+    "gating_regime_light_aux_input_vs_baseline": {
+      "global_delta": {
+        "mse": 0.01452094316482544,
+        "mae": 0.013356685638427734
+      },
+      "pre_eval_delta": {
+        "mse": -0.012861430644989014,
+        "mae": -0.004001975059509277
+      },
+      "post_eval_delta": {
+        "mse": 0.041903555393218994,
+        "mae": 0.03071516752243042
+      },
+      "switch_window_delta": {
+        "mse": -0.0021104812622070312,
+        "mae": -0.0014411211013793945
+      },
+      "switch_pre_delta": {
+        "mse": -0.0012113451957702637,
+        "mae": -0.0009875595569610596
+      },
+      "switch_post_delta": {
+        "mse": -0.0030096769332885742,
+        "mae": -0.0018943548202514648
+      },
+      "takeaway": "switch-window improves versus baseline, but global and post_eval become worse"
     }
   },
   "takeaway": "Gating-only best still gives the strongest global/non-switch balance, but regime_only_light_aux_input is the first regime-side variant that improves switch_window, switch_pre, and switch_post versus baseline; it does so with a clear trade-off of worse global and post_eval metrics. Minimal gating+regime did not recover this switch-window gain."

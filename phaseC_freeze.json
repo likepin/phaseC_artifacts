@@ -448,7 +448,32 @@
       "mse": 0.8864040970802307,
       "mae": 0.7132958173751831,
       "takeaway": "slight global gain; still does not recover switch-window"
+    },
+    "gating_plus_regime_light_aux_input": {
+      "mse": 0.9047273993492126,
+      "mae": 0.7288652658462524,
+      "pre_eval": {
+        "mse": 0.94024658203125,
+        "mae": 0.6875647306442261
+      },
+      "post_eval": {
+        "mse": 0.8692085146903992,
+        "mae": 0.7701656818389893
+      },
+      "switch_window": {
+        "mse": 0.6802034974098206,
+        "mae": 0.5984366536140442
+      },
+      "switch_pre": {
+        "mse": 0.35113760828971863,
+        "mae": 0.43087121844291687
+      },
+      "switch_post": {
+        "mse": 1.0092693567276,
+        "mae": 0.7660021185874939
+      },
+      "takeaway": "first joint path that improves switch-window slices versus baseline, but with a stronger global/post trade-off than gating-only or regime-only."
     }
   },
-  "next_step_recommendation": "Freeze current Phase C results. If continuing, prefer a redesigned regime route or a joint design that explicitly targets switch-window recovery rather than further tuning extra_time_feature."
+  "next_step_recommendation": "Freeze current Phase C results. If continuing, prefer redesigning the joint route so it preserves switch-window gains while reducing the stronger global/post trade-off seen in gating+regime_light_aux_input."
 }
