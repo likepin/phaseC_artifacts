@@ -57,7 +57,7 @@
       "mse": 0.891771674156189,
       "mae": 0.7162291407585144
     },
-    "next_step": "decide whether to redesign regime input or stop after minimal gating+regime failed to show switch-window complementarity",
+    "next_step": "Freeze current results. If continuing, prefer redesigning regime or a joint design aimed at switch-window recovery rather than more tuning of extra_time_feature.",
     "gating_only_loss_weighting_inverse": {
       "status": "passed",
       "mode": "loss_weighting",
@@ -208,14 +208,19 @@
       "beats_baseline_on_switch_window": false
     },
     "best_regime_variant_so_far": {
-      "mode": "extra_time_feature",
-      "metrics": {
-        "mse": 0.8901235461235046,
-        "mae": 0.7147436141967773
-      }
+      "variant": "regime_only_light_aux_input_gpu",
+      "mse": 0.9015757441520691,
+      "mae": 0.7267856001853943,
+      "switch_window_mse": 0.6770349740982056,
+      "switch_window_mae": 0.5970309376716614,
+      "takeaway": "best switch-window recovery among tested regime-only paths, with negative global/post trade-off"
     },
     "regime_local_slice_metrics": "completed",
-    "regime_local_slice_metric_summary": "slice_metrics/phasec_round1_local_slice_metric_summary.json",
+    "regime_local_slice_metric_summary": {
+      "summary_artifact": "slice_metrics/phasec_round1_local_slice_metric_summary.json",
+      "regime_only_extra_time_feature": "global near baseline; switch-window negative",
+      "regime_only_light_aux_input": "switch-window positive; global/post negative"
+    },
     "gating_regime_minimal_gpu_itr": {
       "gating_mode": "loss_weighting",
       "gating_polarity": "direct",
@@ -235,7 +240,39 @@
       "beats_gating_only_on_switch_window": false
     },
     "joint_local_slice_metrics": "slice_metrics/phasec_round1_local_slice_metric_summary.json",
-    "joint_interpretation": "Minimal joint gating+regime preserves the global gains of gating-only and improves post_eval further, but does not recover switch_window complementarity."
+    "joint_interpretation": "Minimal joint gating+regime preserves the global gains of gating-only and improves post_eval further, but does not recover switch_window complementarity.",
+    "regime_only_light_aux_input_gpu_itr": {
+      "status": "validated",
+      "runtime": "itr_gpu",
+      "mode": "light_aux_input",
+      "global_metrics": {
+        "mse": 0.9015757441520691,
+        "mae": 0.7267856001853943
+      },
+      "slice_metrics": {
+        "pre_eval": {
+          "mse": 0.9445242881774902,
+          "mae": 0.6909926533699036
+        },
+        "post_eval": {
+          "mse": 0.8586272597312927,
+          "mae": 0.762578547000885
+        },
+        "switch_window": {
+          "mse": 0.6770349740982056,
+          "mae": 0.5970309376716614
+        },
+        "switch_pre": {
+          "mse": 0.34920498728752136,
+          "mae": 0.4297652542591095
+        },
+        "switch_post": {
+          "mse": 1.0048649311065674,
+          "mae": 0.7642967700958252
+        }
+      },
+      "takeaway": "improves switch-window metrics versus baseline, but degrades global/post metrics"
+    }
   },
   "ownership": {
     "canonical_master": true,

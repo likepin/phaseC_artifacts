@@ -180,33 +180,14 @@ Use the following interpretation for the first round:
 These criteria are meant to decide whether the signal-side work from Phase A/Phase B transfers into model-side value. They are not meant to re-open the synthetic benchmark itself.
 
 ## Current Model-side Status
-- Protocol alignment is complete.
-- `baseline` and `gating noop` both pass in the canonical `itr` GPU environment and match exactly on global metrics.
-- `gating-only direct + alpha-shrink` remains the best gating variant so far:
-  - `alpha=0.25`: `mse=0.8867133`, `mae=0.7141200`
-  - interpretation: small global / non-switch gains with a negative switch-window trade-off.
-- First-round `regime-only` protocol is now frozen as:
-  - `phasec_regime_mode = {none, noop, extra_time_feature}`
-  - `regime_x` and `regime_y` are single scalar channels appended to `seq_x_mark` and `seq_y_mark`
-  - `seq_y_mark` includes the full `label_len + pred_len` regime trajectory
-  - `regime ?` is treated as observable exogenous time context, not a prediction target
-  - `gating = off`
-- `regime_noop` passes and matches baseline exactly on global metrics.
-- `regime_only_extra_time_feature` in `itr + GPU` gives:
-  - global: `mse=0.8901235`, `mae=0.7147436`
-  - `pre_eval`: worse than baseline
-  - `post_eval`: better than baseline
-  - `switch_window`, `switch_pre`, and `switch_post`: all worse than baseline
-- Current interpretation:
-  - first-round `regime-only` as implemented does not improve the switch window
-  - it behaves more like a mild global/post-context feature than a switch-window recovery signal
-- Minimal `gating+regime` is now also validated under the same frozen protocol:
-  - `gating`: `loss_weighting + direct + alpha=0.25`
-  - `regime`: `extra_time_feature`
-  - global: `mse=0.8864041`, `mae=0.7132958`
-  - interpretation: global is slightly better than the best `gating-only` run, but `switch_window`, `switch_pre`, and `switch_post` are still worse than baseline and slightly worse than `gating-only`; the minimal joint design does not demonstrate complementarity.
-- Next step:
-  - decide whether `regime` should be redesigned before any further joint or controller-style integration
+
+- `gating-only direct alpha=0.25` remains the best validated gating path so far.
+- `gating-only` gives a small, reproducible global gain, but harms `switch-window`.
+- `regime-only extra_time_feature` is too weak to recover `switch-window`.
+- `regime-only light_aux_input` is the first regime path that improves `switch_window`, `switch_pre`, and `switch_post` versus baseline, but it degrades global and `post_eval` metrics.
+- Minimal `gating + regime` keeps a small global gain but still does not recover `switch-window`.
+
+The current Phase C question is no longer whether these paths run. It is whether a stronger regime-side path can recover `switch-window` without giving up too much global quality.
 
 ## Canonical Runtime Environment
 - Conda env: `itr`
@@ -214,3 +195,18 @@ These criteria are meant to decide whether the signal-side work from Phase A/Pha
 - Canonical runner: `conda run -n itr python`
 - Reason: this environment contains `torch 2.9.1+cu128` with `sm_120` support for the RTX 5060 Laptop GPU.
 - Rule: do not use the system Python (`D:\Python\Python312\python.exe`) for Phase C training or evaluation runs.
+
+## Regime Light Aux Input Summary
+
+Validated on the same `itr + GPU`, `seed=2026`, and frozen split protocol.
+
+- `regime_noop == baseline`
+- `regime_only_light_aux_input`:
+  - global: `mse=0.9015757441520691`, `mae=0.7267856001853943`
+  - `pre_eval`: better than baseline
+  - `post_eval`: worse than baseline
+  - `switch_window`: better than baseline
+  - `switch_pre`: better than baseline
+  - `switch_post`: better than baseline
+
+Interpretation: `extra_time_feature` was too weak. `light_aux_input` restores switch-window signal, but introduces a clear global/post trade-off.

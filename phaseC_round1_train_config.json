@@ -1,7 +1,7 @@
 {
   "artifact_name": "phaseC_round1_train_config",
   "created_at": "2026-03-26T14:26:20+08:00",
-  "status": "gating_regime_minimal_validated",
+  "status": "regime_light_aux_input_validated",
   "purpose": "Freeze and track the Phase C round-1 model-side training protocol and validated experiment states against the real iTransformer codebase.",
   "model_repo_root": "C:/Users/cyl/Desktop/iTransformer-phasec-clean",
   "code_references": {
@@ -389,7 +389,94 @@
       "beats_gating_only_on_switch_window": false
     },
     "joint_local_slice_metrics": "slice_metrics/phasec_round1_local_slice_metric_summary.json",
-    "joint_interpretation": "Minimal joint gating+regime preserves the global gains of gating-only and improves post_eval further, but switch_window, switch_pre, and switch_post remain worse than baseline and slightly worse than gating-only."
+    "joint_interpretation": "Minimal joint gating+regime preserves the global gains of gating-only and improves post_eval further, but switch_window, switch_pre, and switch_post remain worse than baseline and slightly worse than gating-only.",
+    "regime_light_aux_input_gpu_itr": {
+      "status": "passed",
+      "mode": "light_aux_input",
+      "artifact": "lambda_regime_baseline.npy",
+      "artifact_hash": "6db132725d81c7889924901173a9399221293406",
+      "metrics": {
+        "mae": 0.7267856001853943,
+        "mse": 0.9015757441520691,
+        "rmse": 0.9495134353637695,
+        "mape": 1.3467819690704346,
+        "mspe": 74.79505157470703
+      },
+      "pre_post": {
+        "pre_eval": {
+          "intervals": [
+            [
+              2900,
+              3400
+            ]
+          ],
+          "prediction_element_count": 29664,
+          "scalar_element_count": 296640,
+          "mae": 0.6909926533699036,
+          "mse": 0.9445242881774902,
+          "rmse": 0.9718663692474365
+        },
+        "post_eval": {
+          "intervals": [
+            [
+              5500,
+              6000
+            ]
+          ],
+          "prediction_element_count": 29664,
+          "scalar_element_count": 296640,
+          "mae": 0.762578547000885,
+          "mse": 0.8586272597312927,
+          "rmse": 0.9266214370727539
+        }
+      },
+      "switch": {
+        "switch_window": {
+          "intervals": [
+            [
+              3400,
+              3800
+            ]
+          ],
+          "prediction_element_count": 38400,
+          "scalar_element_count": 384000,
+          "mae": 0.5970309376716614,
+          "mse": 0.6770349740982056,
+          "rmse": 0.8228213787078857
+        },
+        "switch_pre": {
+          "intervals": [
+            [
+              3400,
+              3600
+            ]
+          ],
+          "prediction_element_count": 19200,
+          "scalar_element_count": 192000,
+          "mae": 0.4297652542591095,
+          "mse": 0.34920498728752136,
+          "rmse": 0.5909357070922852
+        },
+        "switch_post": {
+          "intervals": [
+            [
+              3600,
+              3800
+            ]
+          ],
+          "prediction_element_count": 19200,
+          "scalar_element_count": 192000,
+          "mae": 0.7642967700958252,
+          "mse": 1.0048649311065674,
+          "rmse": 1.002429485321045
+        }
+      },
+      "beats_baseline_on_switch_window": true,
+      "beats_baseline_globally": false,
+      "device": "cuda:0",
+      "runner": "conda run -n itr python",
+      "interpretation": "Light aux input is the first regime-side variant to improve switch_window, switch_pre, and switch_post versus baseline, but it degrades global and post_eval metrics."
+    }
   },
   "next_step": {
     "arm": "regime-only",

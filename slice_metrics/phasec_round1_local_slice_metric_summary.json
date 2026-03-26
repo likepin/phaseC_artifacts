@@ -15,7 +15,9 @@
     "regime_noop_switch": "slice_metrics/regime_noop_switch/phasec_switch_slice_metrics.json",
     "regime_extra_time_feature_switch": "slice_metrics/regime_extra_time_feature_switch/phasec_switch_slice_metrics.json",
     "gating_regime_minimal_posthoc": "slice_metrics/gating_regime_minimal_posthoc.json",
-    "gating_regime_minimal_switch": "slice_metrics/gating_regime_minimal_switch/phasec_switch_slice_metrics.json"
+    "gating_regime_minimal_switch": "slice_metrics/gating_regime_minimal_switch/phasec_switch_slice_metrics.json",
+    "regime_light_aux_input_posthoc": "slice_metrics/regime_light_aux_input_posthoc.json",
+    "regime_light_aux_input_switch": "slice_metrics/regime_light_aux_input_switch/phasec_switch_slice_metrics.json"
   },
   "variants": {
     "baseline_gpu": {
@@ -485,6 +487,84 @@
           "rmse": 1.010306477546692
         }
       }
+    },
+    "regime_only_light_aux_input_gpu": {
+      "global": {
+        "mae": 0.7267856001853943,
+        "mse": 0.9015757441520691,
+        "rmse": 0.9495134353637695,
+        "mape": 1.3467819690704346,
+        "mspe": 74.79505157470703
+      },
+      "pre_post": {
+        "pre_eval": {
+          "intervals": [
+            [
+              2900,
+              3400
+            ]
+          ],
+          "prediction_element_count": 29664,
+          "scalar_element_count": 296640,
+          "mae": 0.6909926533699036,
+          "mse": 0.9445242881774902,
+          "rmse": 0.9718663692474365
+        },
+        "post_eval": {
+          "intervals": [
+            [
+              5500,
+              6000
+            ]
+          ],
+          "prediction_element_count": 29664,
+          "scalar_element_count": 296640,
+          "mae": 0.762578547000885,
+          "mse": 0.8586272597312927,
+          "rmse": 0.9266214370727539
+        }
+      },
+      "switch": {
+        "switch_window": {
+          "intervals": [
+            [
+              3400,
+              3800
+            ]
+          ],
+          "prediction_element_count": 38400,
+          "scalar_element_count": 384000,
+          "mae": 0.5970309376716614,
+          "mse": 0.6770349740982056,
+          "rmse": 0.8228213787078857
+        },
+        "switch_pre": {
+          "intervals": [
+            [
+              3400,
+              3600
+            ]
+          ],
+          "prediction_element_count": 19200,
+          "scalar_element_count": 192000,
+          "mae": 0.4297652542591095,
+          "mse": 0.34920498728752136,
+          "rmse": 0.5909357070922852
+        },
+        "switch_post": {
+          "intervals": [
+            [
+              3600,
+              3800
+            ]
+          ],
+          "prediction_element_count": 19200,
+          "scalar_element_count": 192000,
+          "mae": 0.7642967700958252,
+          "mse": 1.0048649311065674,
+          "rmse": 1.002429485321045
+        }
+      }
     }
   },
   "comparisons": {
@@ -617,7 +697,33 @@
         "mae": 0.0016715526580810547,
         "mse": 0.004262447357177734
       }
+    },
+    "regime_light_aux_input_vs_baseline": {
+      "global_delta": {
+        "mae": 0.01127701997756958,
+        "mse": 0.011369287967681885
+      },
+      "pre_eval_delta": {
+        "mae": -0.0005740523338317871,
+        "mse": -0.00858372449874878
+      },
+      "post_eval_delta": {
+        "mae": 0.023128032684326172,
+        "mse": 0.03132230043411255
+      },
+      "switch_window_delta": {
+        "mae": -0.002846837043762207,
+        "mse": -0.0052790045738220215
+      },
+      "switch_pre_delta": {
+        "mae": -0.0020935237407684326,
+        "mse": -0.0031439661979675293
+      },
+      "switch_post_delta": {
+        "mae": -0.003599703311920166,
+        "mse": -0.007414102554321289
+      }
     }
   },
-  "takeaway": "Minimal gating+regime preserved and slightly improved the best global gating-only result, improved post-eval further, but did not recover switch-window metrics versus baseline or gating-only; complementarity is not demonstrated by the minimal joint design."
+  "takeaway": "Gating-only best still gives the strongest global/non-switch balance, but regime_only_light_aux_input is the first regime-side variant that improves switch_window, switch_pre, and switch_post versus baseline; it does so with a clear trade-off of worse global and post_eval metrics. Minimal gating+regime did not recover this switch-window gain."
 }
